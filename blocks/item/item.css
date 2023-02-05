@@ -1,0 +1,11 @@
+.item {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.item > div {
+  max-width: 210px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
