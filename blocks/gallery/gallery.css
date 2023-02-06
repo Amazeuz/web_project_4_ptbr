@@ -9,6 +9,5 @@
   .gallery {
     width: 100%;
     justify-content: center;
-    column-gap: 13px;
   }
 }
