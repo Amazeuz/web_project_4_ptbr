@@ -9,6 +9,12 @@
   margin: 0;
 }
 
+@media screen and (min-width: 601px) and (max-width: 894px) {
+  .profile__name {
+    grid-area: name;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .profile__name {
     max-width: 200px;

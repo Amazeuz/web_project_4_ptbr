@@ -5,9 +5,21 @@
   padding: 14px 64px;
 }
 
+@media screen and (min-width: 601px) and (max-width: 894px) {
+  .profile__add {
+    position: relative;
+    left: 33px;
+    /* position: relative é usado para alinhar o centro do elemento profile__add
+    com o column-gap entre os dois elementos item abaixo */
+    width: 25%;
+    max-height: 30px;
+    grid-area: add;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .profile__add {
-    width: 100%;
+    width: 30%;
     max-height: 30px;
   }
 }
