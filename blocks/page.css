@@ -1,7 +1,6 @@
 .page {
   background-color: #000000;
   display: flex;
-  align-items: center;
   flex-direction: column;
   row-gap: 50px;
 }

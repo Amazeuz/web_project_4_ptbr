@@ -3,4 +3,12 @@
   display: flex;
   flex-direction: column;
   row-gap: 50px;
+  margin: auto;
+}
+
+@media screen and (max-width: 414px) {
+  .content {
+    width: 90%;
+  }
+
 }

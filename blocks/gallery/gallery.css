@@ -4,3 +4,10 @@
   row-gap: 21px;
   column-gap: 17px;
 }
+
+@media screen and (max-width: 414px) {
+  .gallery {
+    width: 100%;
+    justify-content: center;
+  }
+}
