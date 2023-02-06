@@ -5,7 +5,7 @@
   padding: 14px 64px;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 600px) {
   .profile__add {
     width: 100%;
     max-height: 30px;
