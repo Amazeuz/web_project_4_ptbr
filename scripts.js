@@ -46,5 +46,5 @@ for (let i = 0; i < likeButton.length; i++) {
 };
 
 editButton.addEventListener("click", clickEditButton);
-exitButton.addEventListener("submit", closeForm);
+exitButton.addEventListener("click", closeForm);
 
