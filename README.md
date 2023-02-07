@@ -1,16 +1,17 @@
-# Projeto 4:  EUA Afora
+Around the U.S
 
-### Visão geral
+Around the U.S é uma página de perfil que tem como características a exibição de nome, informações, e uma galeria de fotos, de pessoas que a usam.
 
-* Figma
-* Imagens
+A página é altamente responsiva, com diferentes layouts para diferentes tipos de dispositivos:
 
-**Figma**
+-Até 414px;
 
-* [Link para o projeto no Figma](https://www.figma.com/file/XfB6BSINvliub43JgKza1e/WEB.-Sprint-4.-Around-The-U.S.-desktop-%2B-mobile-pt)
+-414px á 600px;
 
-**Imagens**
+-600px á 894px;
 
-A maneira como você fará isso no trabalho é exportando imagens diretamente do Figma — recomendamos fazer isso para praticar mais. Não se esqueça de otimizá-los [aqui](https://tinypng.com/), para que seu projeto carregue mais rápido.
+-Resoluções superiores;
 
-Divirta-se com JavaScript!
+Nesse projeto foram utilizados as técnologias mais básicas para desenvolvimento web, HTML, CSS e Javascript, além de git e metodologia BEM.
+
+Link do site para github pages: https://amazeuz.github.io/web_project_4_ptbr/
