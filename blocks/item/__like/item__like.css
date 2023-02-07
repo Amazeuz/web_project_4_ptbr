@@ -1,3 +1,12 @@
 .item__like {
+  cursor: pointer;
+  transition: opacity .4s;
+}
 
+.item__like:hover {
+  opacity: .5;
+}
+
+.item__like_black {
+  background-color: black;
 }

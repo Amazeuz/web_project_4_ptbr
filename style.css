@@ -6,7 +6,12 @@
   top: 50%;
   transform: translate(50%, -50%);
   background-color: white;
+  opacity: 1;
   border-radius: 10px;
+}
+
+.form_hidden {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {
@@ -20,13 +25,65 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background: black;
   opacity: 0.5;
 }
 
-.teste3 {
+.form__items {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  margin: 34px auto;
+}
+
+.form__input-container {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  row-gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.form__title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0;
+}
+
+.form__input {
   border: 0;
   box-sizing: border-box;
   border-bottom: 1px solid #bcbcc4;
   background-color: transparent;
+}
+
+.form__input-name {
+
+}
+
+.form__input-job {
+
+}
+
+.form__button {
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  cursor: pointer;
+  transition: opacity .4s;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  margin: auto;
+  border-radius: 4px;
+}
+
+.form__button:hover {
+  opacity: .5;
 }
