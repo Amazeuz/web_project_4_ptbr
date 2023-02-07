@@ -1,5 +1,5 @@
 .profile__add {
-  height: 50%;
+  height: 30px;
   align-self: center;
   border: 2px solid white;
   padding: 14px 64px;
@@ -13,16 +13,12 @@
 
 @media screen and (min-width: 601px) and (max-width: 894px) {
   .profile__add {
-    position: relative;
-    width: 25%;
-    max-height: 30px;
-    grid-area: add;
+    padding: 7px 26px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .profile__add {
-    width: 30%;
-    max-height: 30px;
+    padding: 14px calc(260px / 2);
   }
 }

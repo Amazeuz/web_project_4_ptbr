@@ -11,12 +11,6 @@
   opacity: .5;
 }
 
-@media screen and (min-width: 601px) and (max-width: 894px) {
-  .profile__edit {
-    grid-area: edit;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .profile__edit {
     max-width: 18px;

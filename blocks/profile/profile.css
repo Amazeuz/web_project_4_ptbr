@@ -7,15 +7,10 @@
   .profile {
     width: 100%;
     max-width: calc(282px + 282px + 21px);
-    display: grid;
+    display: flex;
     float: right;
     align-items: center;
     margin: auto;
-    grid-template-areas:
-    "image name edit"
-    "job . ."
-    ". add ."
-    ;
   }
 }
 

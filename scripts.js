@@ -3,10 +3,15 @@ let opacity = document.querySelector('#opacity-block')
 let editButton = document.querySelector('.profile__edit');
 let addButton = document.querySelector('.profile__add');
 let likeButton = document.querySelector('section.gallery div.item .item__like');
+let exitButton = document.querySelector('.form__exit');
 
 function clickLikeButton () {
-  likeButton.classList.add('item__like_black');
-  console.log('teste');
+  if (likeButton.getAttribute('src') != '/images/vector__liked-button.svg') {
+    likeButton.setAttribute('src', '/images/vector__liked-button.svg');
+  }
+  else {
+    likeButton.setAttribute('src', '/images/vector__like-button.svg');
+  }
 }
 
 function clickEditButton () {
@@ -17,8 +22,8 @@ function clickEditButton () {
 function changeInputs () {
   let name = document.querySelector('.profile__name');
   let job = document.querySelector('.profile__job');
-  let newName = document.querySelector('.form__input-name');
-  let newJob = document.querySelector('.form__input-job');
+  let newName = document.querySelector('#form__input-name');
+  let newJob = document.querySelector('#form__input-job');
 
   if (newName.value.length > 0 && newJob.value.length > 0) {
     name.textContent = newName.value;
@@ -40,3 +45,4 @@ function closeForm () {
 
 editButton.addEventListener("click", clickEditButton);
 likeButton.addEventListener("click", clickLikeButton);
+exitButton.addEventListener("click", closeForm);

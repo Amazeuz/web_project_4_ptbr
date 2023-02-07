@@ -5,7 +5,7 @@
 
 @media screen and (min-width: 601px) and (max-width: 894px) {
   .profile__photo {
-    grid-area: image;
+    margin-right: 10px;
   }
 }
 

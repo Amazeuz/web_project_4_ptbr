@@ -12,8 +12,8 @@
 
 @media screen and (min-width: 601px) and (max-width: 894px) {
   .profile__name {
-    grid-area: name;
-    max-width: 390px;
+    max-width: 320px;
+    font-size: 32px;
   }
 }
 
