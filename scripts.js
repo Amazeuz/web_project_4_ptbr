@@ -1,9 +1,9 @@
-let form = document.querySelector('.form');
-let opacity = document.querySelector('#opacity-block')
-let editButton = document.querySelector('.profile__edit');
-let addButton = document.querySelector('.profile__add');
-let likeButton = document.querySelectorAll('.item__like');
-let exitButton = document.querySelector('.form__exit');
+const form = document.querySelector('.form');
+const opacity = document.querySelector('#opacity-block')
+const editButton = document.querySelector('.profile__edit');
+const addButton = document.querySelector('.profile__add');
+const likeButton = document.querySelectorAll('.item__like');
+const exitButton = document.querySelector('.form__exit');
 
 function clickEditButton () {
   opacity.classList.add('page-opacity');
@@ -11,10 +11,10 @@ function clickEditButton () {
 }
 
 function changeInputs () {
-  let name = document.querySelector('.profile__name');
-  let about = document.querySelector('.profile__about');
-  let newName = document.querySelector('#form__input-name');
-  let newAbout = document.querySelector('#form__input-about');
+  const name = document.querySelector('.profile__name');
+  const about = document.querySelector('.profile__about');
+  const newName = document.querySelector('#form__input-name');
+  const newAbout = document.querySelector('#form__input-about');
 
   if (newName.value.length > 0 && newAbout.value.length > 0) {
     name.textContent = newName.value;
