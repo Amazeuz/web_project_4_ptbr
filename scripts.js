@@ -36,11 +36,11 @@ function closeForm () {
 
 for (let i = 0; i < likeButton.length; i++) {
   likeButton[i].addEventListener("click", function clickLikeButton () {
-    if (likeButton[i].getAttribute('src') != '/images/vector__liked-button.svg') {
-      likeButton[i].setAttribute('src', '/images/vector__liked-button.svg');
+    if (likeButton[i].getAttribute('src') != 'images/vector__liked-button.svg') {
+      likeButton[i].setAttribute('src', 'images/vector__liked-button.svg');
     }
     else {
-      likeButton[i].setAttribute('src', '/images/vector__like-button.svg');
+      likeButton[i].setAttribute('src', 'images/vector__like-button.svg');
     }
   })
 };
