@@ -1,0 +1,11 @@
+.image-click__exit {
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+}
+
+@media screen and (max-width: 414px) {
+  .image-click__exit {
+    width: 30px;
+  }
+}

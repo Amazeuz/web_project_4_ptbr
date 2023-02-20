@@ -7,6 +7,7 @@
 @import url(../blocks/profile-info/profile-info.css);
 @import url(../blocks/gallery/gallery.css);
 @import url(../blocks/item/item.css);
+@import url(../blocks/image-click/image-click.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/root/root.css);
@@ -32,6 +33,11 @@
 @import url(../blocks/form/__items/form__items.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/_hidden/form_hidden.css);
+
+@import url(../blocks/image-click/__name/image-click__name.css);
+@import url(../blocks/image-click/__exit/image-click__exit.css);
+@import url(../blocks/image-click/__image-open/image-click__image-open.css);
+@import url(../blocks/image-click/__image-open/_hidden/image-click__image-open_hidden.css);
 @import url(../blocks/opacity-block/page-opacity.css);
 
 @import url(../fonts/inter.css);

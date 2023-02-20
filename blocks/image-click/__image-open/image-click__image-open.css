@@ -1,0 +1,11 @@
+.image-click__image-open {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 414px) {
+  .image-click {
+    bottom: 0;
+  }
+}

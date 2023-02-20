@@ -1,6 +1,8 @@
 .item {
   background-color: white;
   border-radius: 10px;
+  max-width: 282px;
+  object-fit: cover;
 }
 
 .item > div {
