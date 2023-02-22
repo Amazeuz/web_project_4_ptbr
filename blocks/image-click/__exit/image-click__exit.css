@@ -2,10 +2,20 @@
   position: absolute;
   bottom: 100%;
   left: 100%;
+  width: 40px;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  transition: opacity .4s;
 }
 
 @media screen and (max-width: 414px) {
   .image-click__exit {
     width: 30px;
+    left: 100%;
+    top: -15%;
   }
+}
+
+.image-click__exit:hover {
+  opacity: .5;
 }

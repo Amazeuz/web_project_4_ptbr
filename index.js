@@ -51,6 +51,7 @@ const imageBlock = document.querySelector('.image-click');
 const cardImages = document.querySelectorAll('.item__image');
 const editButton = document.querySelector('.profile__edit');
 const exitButtons = document.querySelectorAll('.form__exit');
+const imageExit = document.querySelector('.image-click__exit');
 
 function clickAddButton () {
   formImage.style.opacity = 1;
@@ -137,6 +138,7 @@ function changeInputs () {
 }
 
 function closePopup () {
+
   opacity.classList.remove('page-opacity');
   setTimeout(() => { opacity.style.pointerEvents = 'all'; }, 500);
 
@@ -146,20 +148,20 @@ function closePopup () {
   setTimeout(() => { formImage.classList.add('form_hidden'); }, 500);
 
   imageBlock.style.opacity = 0;
-  setTimeout(() => { imageBlock.classList.add('image-click__openned_display_hidden') }, 500);
+  setTimeout(() => { imageBlock.classList.add('image-click_hidden') }, 500);
 }
 
 function checkCardImages () {
   const cardImages = document.querySelectorAll('.item__image');
   const cardImagesNames = document.querySelectorAll('.item__title');
-  const image = imageBlock.querySelector('.image-click__openned');
+  const image = imageBlock.querySelector('.image-click-open');
 
   for (let i = 0; i < cardImages.length; i++) {
     cardImages[i].addEventListener('click', function () {
       imageBlock.style.opacity = 1;
       setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
       opacity.classList.add('page-opacity');
-      imageBlock.classList.remove('image-click__openned_display_hidden');
+      imageBlock.classList.remove('image-click_hidden');
       image.setAttribute('src', cardImages[i].getAttribute('src'));
       imageBlock.querySelector('.image-click__name').textContent = cardImagesNames[i].textContent;
 
@@ -217,7 +219,8 @@ for (let i = 0; i < exitButtons.length; i++) {
 }
 
 addButton.addEventListener('click', clickAddButton);
-editButton.addEventListener("click", clickEditButton);
+editButton.addEventListener('click', clickEditButton);
+imageExit.addEventListener('click', closePopup);
 
 checkCardImages();
 checkLikeButton();
