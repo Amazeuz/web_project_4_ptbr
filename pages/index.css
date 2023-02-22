@@ -22,6 +22,7 @@
 @import url(../blocks/profile-info/__name/profile__name.css);
 @import url(../blocks/profile/__photo/profile__photo.css);
 
+@import url(../blocks/item/__trash-icon/item__trash-icon.css);
 @import url(../blocks/item/__image/item__image.css);
 @import url(../blocks/item/__like/item__like.css);
 @import url(../blocks/item/__title/item__title.css);
