@@ -26,22 +26,6 @@ const initialCards = [
   }
 ];
 
-function likeButtonCheck () {
-  const likeButton = document.querySelectorAll('.item__like');
-  for (let i = 0; i < likeButton.length; i++) {
-    likeButton[i].addEventListener("click", function () {
-      if (likeButton[i].getAttribute('src') === 'images/vector__like-button.svg') {
-        likeButton[i].setAttribute('src', 'images/vector__liked-button.svg');
-        console.log('PRETO ')
-      }
-      else if (likeButton[i].getAttribute('src') === 'images/vector__liked-button.svg') {
-        likeButton[i].setAttribute('src', 'images/vector__like-button.svg');
-        console.log('BRANCO ')
-      }
-    })
-  }
-}
-
 function addInitialCards () {
   for (let i = 0; i < initialCards.length; i++) {
     const cardName = initialCards[i].name;
@@ -55,7 +39,6 @@ function addInitialCards () {
       <img src="images/vector__like-button.svg" class="item__like" alt="Um coração com a função de curtir a imagem">
     </div>
    </div>`
-
   }
 }
 addInitialCards();
@@ -63,19 +46,20 @@ addInitialCards();
 const form = document.querySelector('.form');
 const formImage = document.querySelector('#form-image');
 const opacity = document.querySelector('#opacity-block')
-const editButton = document.querySelector('.profile__edit');
 const addButton = document.querySelector('.profile__add');
 const imageBlock = document.querySelector('.image-click');
 const cardImage = document.querySelectorAll('.item__image');
-const likeButton = document.querySelectorAll('.item__like');
+const editButton = document.querySelector('.profile__edit');
 const exitButton = document.querySelectorAll('.form__exit');
 
 function clickAddButton () {
+  formImage.style.opacity = 1;
   opacity.classList.add('page-opacity');
   formImage.classList.remove('form_hidden');
 }
 
 function clickEditButton () {
+  form.style.opacity = 1;
   opacity.classList.add('page-opacity');
   form.classList.remove('form_hidden');
 }
@@ -85,10 +69,9 @@ function changeImageInputs () {
   const cardInputLink = document.querySelector('#form-image__input-url');
 
   if (cardInputName.value.length > 0 && cardInputLink.value.length > 0) {
-    console.log(cardInputLink.value)
-    gallery.insertAdjacentHTML("afterend",
+    gallery.insertAdjacentHTML("afterbegin",
     `<div class="item">
-      <img class="item__image" src='${cardInputLink.value}'>
+      <img class="item__image" src=${cardInputLink.value}>
       <img class="item__trash-icon" src='images/trash-icon.svg' alt="Ícone de lixo, para excluir a foto desejada">
       <div>
         <h1 class="item__title">${cardInputName.value}</h1>
@@ -99,9 +82,9 @@ function changeImageInputs () {
     cardInputName.value = '';
     cardInputLink.value = '';
 
-    closeForm();
-    likeButtonCheck();
+    closeWindow();
     cardImageCheck();
+    likeButtonCheck();
     deleteCardCheck();
   }
   else {
@@ -121,7 +104,7 @@ function changeInputs () {
     about.textContent = newAbout.value;
     newName.value = '';
     newAbout.value = '';
-    closeForm();
+    closeWindow();
   }
   else {
     newName.setAttribute('placeholder', 'Preencha os campos !');
@@ -129,30 +112,35 @@ function changeInputs () {
   }
 }
 
-function closeForm () {
+function closeWindow () {
   opacity.classList.remove('page-opacity');
-  form.classList.add('form_hidden');
-  formImage.classList.add('form_hidden');
-  imageBlock.classList.add('image-click__image-open_hidden')
+  form.style.opacity = 0;
+  setTimeout(() => { form.classList.add('form_hidden'); }, 500);
+  formImage.style.opacity = 0;
+  setTimeout(() => { formImage.classList.add('form_hidden'); }, 500);
+
+  imageBlock.style.opacity = 0;
+  setTimeout(() => { imageBlock.classList.add('image-click__image-open_hidden') }, 500);
 }
 
 function cardImageCheck () {
   const cardImage = document.querySelectorAll('.item__image');
   const cardImageName = document.querySelectorAll('.item__title');
-  const image = imageBlock.querySelector('.image-click__image-open')
+  const image = imageBlock.querySelector('.image-click__image-open');
 
   for (let i = 0; i < cardImage.length; i++) {
     cardImage[i].addEventListener('click', function () {
+      imageBlock.style.opacity = 1;
       opacity.classList.add('page-opacity');
       imageBlock.classList.remove('image-click__image-open_hidden');
       image.setAttribute('src', cardImage[i].getAttribute('src'));
       imageBlock.querySelector('.image-click__name').textContent = cardImageName[i].textContent;
 
-      const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth
-      const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight
-
       // O Código a seguir é usado para implementar o tamanho em width e height
       // da imagem aberta com base no tamanho original da imagem.
+
+      const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth;
+      const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight;
 
       let divisionValue = 0
       imageSizeArray = [100, 100, 150, 200, 300, 400, 500];
@@ -160,15 +148,31 @@ function cardImageCheck () {
 
       for (let i = 0; i < imageSizeArray.length; i++) {
         if (imageWidthPercentage > imageSizeArray[i] || imageHeightPercentage > imageSizeArray[i]) {
-          continue
+          continue;
         }
         else {
-          divisionValue = divisionArray[i]
-          break
+          divisionValue = divisionArray[i];
+          break;
         }
       }
       imageBlock.style.width = `${imageWidthPercentage / divisionValue}%`;
       imageBlock.style.height = `${imageHeightPercentage / divisionValue}%`;
+    })
+  }
+}
+
+function likeButtonCheck () {
+  const likeButton = document.querySelectorAll('.item__like');
+  for (let i = 0; i < likeButton.length; i++) {
+    likeButton[i].addEventListener("click", function () {
+      if (likeButton[i].getAttribute('src') === 'images/vector__like-button.svg') {
+        likeButton[i].setAttribute('src', 'images/vector__liked-button.svg');
+        console.log('PRETO ')
+      }
+      else if (likeButton[i].getAttribute('src') === 'images/vector__liked-button.svg') {
+        likeButton[i].setAttribute('src', 'images/vector__like-button.svg');
+        console.log('BRANCO ')
+      }
     })
   }
 }
@@ -179,12 +183,13 @@ function deleteCardCheck () {
     trashButton[i].addEventListener('click', function () {
       const card = trashButton[i].closest('.item');
       card.remove()
+      console.log('a')
     })
   }
 }
 
 for (let i = 0; i < exitButton.length; i++) {
-  exitButton[i].addEventListener("click", closeForm)
+  exitButton[i].addEventListener("click", closeWindow)
 }
 
 addButton.addEventListener('click', clickAddButton);

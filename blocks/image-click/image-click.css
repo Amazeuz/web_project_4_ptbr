@@ -6,10 +6,5 @@
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-@media screen and (max-width: 414px) {
-  .image-click {
-
-  }
+  transition: opacity 0.5s;
 }

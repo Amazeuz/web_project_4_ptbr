@@ -1,3 +1,4 @@
 .image-click__image-open_hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
