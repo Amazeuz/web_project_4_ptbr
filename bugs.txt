@@ -1,7 +1,0 @@
-#CORRIGIDO DE ALGUMA MANEIRA // Quando clicado pra abrir uma imagem, a próxima imagem clicada terá as proporções da primeira imagem.
-
-Após a adição de novo card, a função de checagem do botão de like funciona mais de uma vez, causando erros.
-
-#CORRIGIDO // O botão de fechar ainda não tem a funcionalidade de transição.
-
-As funções de Check estão sendo executadas diversas vezes. O motivo é o uso do insertAdjacentHTML na linha 87.
