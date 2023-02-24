@@ -15,6 +15,11 @@
   column-gap: 10px;
 }
 
+.profile-info > div > button {
+  background-color: black;
+  border: none;
+}
+
 @media screen and (min-width: 601px) and (max-width: 894px) {
   .profile-info {
     row-gap: 8px;

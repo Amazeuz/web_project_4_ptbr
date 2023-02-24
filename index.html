@@ -19,7 +19,7 @@
         <div class="profile-info">
           <div>
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button style="background-color: black;"><img src="images/vector__edit.svg" class="profile__edit" alt="Botão de edição dos campos Nome e Sobre"></button>
+            <button><img src="images/vector__edit.svg" class="profile__edit" alt="Botão de edição dos campos Nome e Sobre"></button>
           </div>
           <h2 class="profile__about">Explorar</h2>
         </div>
@@ -29,7 +29,7 @@
       </section>
     </main>
     <footer class="footer">
-      <h1>© 2023 Around The U.S.</h1>
+      <h1>&#169; 2023 Around The U.S.</h1>
     </footer>
   </div>
   <section class="form form_hidden">
@@ -40,7 +40,7 @@
         <input class="form__input" id="form__input-name" type="text" placeholder="Nome">
         <input class="form__input" id="form__input-about" type="text" placeholder="Sobre mim">
       </fieldset>
-      <button type="button" onclick="changeInputs()" class="form__button">Salvar</button>
+      <button type="button" id="form__items-save" class="form__button">Salvar</button>
     </form>
   </section>
   <section class="form form_hidden" id='form-image'>
@@ -51,7 +51,7 @@
         <input class="form__input" id="form-image__input-title" type="text" placeholder="Título">
         <input class="form__input" id="form-image__input-url" type="text" placeholder="Link de imagem">
       </fieldset>
-      <button type="button" onclick="changeImageInputs()" class="form__button">Criar</button>
+      <button type="button" id="form__items-create" class="form__button">Criar</button>
     </form>
   </section>
   <section class="image-click image-click_hidden">

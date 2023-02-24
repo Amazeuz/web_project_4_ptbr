@@ -27,19 +27,17 @@ const initialCards = [
 ];
 
 function addInitialCards () {
-  for (let i = 0; i < initialCards.length; i++) {
-    const cardName = initialCards[i].name;
-    const cardLink = initialCards[i].link;
+  initialCards.forEach(function (item) {
     gallery.innerHTML +=
   `<div class="item">
-    <img class="item__image" src=${cardLink}>
+    <img class="item__image" src=${item.link} alt="Imagem inicial adicionada">
     <img class="item__trash-icon" src='images/trash-icon.svg' alt="Ícone de lixo, para excluir a foto desejada">
     <div>
-      <h1 class="item__title">${cardName}</h1>
+      <h1 class="item__title">${item.name}</h1>
       <img src="images/vector__like-button.svg" class="item__like" alt="Um coração com a função de curtir a imagem">
     </div>
    </div>`
-  }
+  })
 }
 addInitialCards();
 
@@ -51,6 +49,8 @@ const imageBlock = document.querySelector('.image-click');
 const cardImages = document.querySelectorAll('.item__image');
 const editButton = document.querySelector('.profile__edit');
 const exitButtons = document.querySelectorAll('.form__exit');
+const editSave = document.querySelector('#form__items-save');
+const cardCreate = document.querySelector('#form__items-create');
 const imageExit = document.querySelector('.image-click__exit');
 
 function clickAddButton () {
@@ -67,14 +67,14 @@ function clickEditButton () {
   form.classList.remove('form_hidden');
 }
 
-function changeImageInputs () {
+function createNewCard () {
   const cardInputName = document.querySelector('#form-image__input-title');
   const cardInputLink = document.querySelector('#form-image__input-url');
 
-  if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('https://')) {
+  if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('http')) {
     gallery.insertAdjacentHTML("afterbegin",
     `<div class="item">
-      <img class="item__image" src=${cardInputLink.value}>
+      <img class="item__image" src=${cardInputLink.value} alt="Imagem adicionada pelo usuário">
       <img class="item__trash-icon" src='images/trash-icon.svg' alt="Ícone de lixo, para excluir a foto desejada">
       <div>
         <h1 class="item__title">${cardInputName.value}</h1>
@@ -156,71 +156,71 @@ function checkCardImages () {
   const cardImagesNames = document.querySelectorAll('.item__title');
   const image = imageBlock.querySelector('.image-click-open');
 
-  for (let i = 0; i < cardImages.length; i++) {
-    cardImages[i].addEventListener('click', function () {
+  cardImages.forEach(function (item) {
+    item.addEventListener('click', function () {
       imageBlock.style.opacity = 1;
       setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
       opacity.classList.add('page-opacity');
       imageBlock.classList.remove('image-click_hidden');
-      image.setAttribute('src', cardImages[i].getAttribute('src'));
-      imageBlock.querySelector('.image-click__name').textContent = cardImagesNames[i].textContent;
+      image.setAttribute('src', item.getAttribute('src'));
+      imageBlock.querySelector('.image-click__name').textContent = item.textContent;
 
-      function resizeOpennedImage () {
-        const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth;
-        const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight;
+      const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth;
+      const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight;
 
-        let divisionValue = 0
-        imageSizeArray = [0, 50, 100, 150, 200, 300, 400, 500];
-        divisionArray = [0.5, 1, 1.2, 1.7, 2.5, 3.8, 5, 8];
+      let divisionValue = 0
+      imageSizeArray = [0, 50, 100, 150, 200, 300, 400, 500];
+      divisionArray = [0.5, 1, 1.2, 1.7, 2.5, 3.8, 5, 8];
 
-        for (let i = 0; i < imageSizeArray.length; i++) {
-          if (imageWidthPercentage > imageSizeArray[i] || imageHeightPercentage > imageSizeArray[i]) {
-            continue;
-          }
-          else {
-            divisionValue = divisionArray[i];
-            break;
-          }
+      for (let i = 0; i < imageSizeArray.length; i++) {
+        if (imageWidthPercentage > imageSizeArray[i] || imageHeightPercentage > imageSizeArray[i]) {
+          continue;
+        }
+        else {
+          divisionValue = divisionArray[i];
+          break;
+        }
         }
         imageBlock.style.width = `${imageWidthPercentage / divisionValue}%`;
         imageBlock.style.height = `${imageHeightPercentage / divisionValue}%`;
-      }
-      resizeOpennedImage();
     })
-  }
+  })
 }
+
 
 function checkLikeButton () {
   const likeButtons = document.querySelectorAll('.item__like');
-  for (let i = 0; i < likeButtons.length; i++) {
-    likeButtons[i].addEventListener("click", function checkButton () {
-      if (likeButtons[i].getAttribute('src') === 'images/vector__like-button.svg') {
-        likeButtons[i].setAttribute('src', 'images/vector__liked-button.svg');
+  likeButtons.forEach(function (item) {
+    item.addEventListener("click", function checkButton () {
+      if (item.getAttribute('src') === 'images/vector__like-button.svg') {
+        item.setAttribute('src', 'images/vector__liked-button.svg');
       }
       else {
-        likeButtons[i].setAttribute('src', 'images/vector__like-button.svg');
+        item.setAttribute('src', 'images/vector__like-button.svg');
       }
     })
-  }
+  })
 }
 
 function checkDeleteCard () {
   const trashButton = document.querySelectorAll('.item__trash-icon');
-  for (let i = 0; i < trashButton.length; i++) {
-    trashButton[i].addEventListener('click', function () {
-      const card = trashButton[i].closest('.item');
+  trashButton.forEach(function (item) {
+    item.addEventListener('click', function () {
+      const card = item.closest('.item');
       card.remove();
     })
-  }
+  });
 }
 
-for (let i = 0; i < exitButtons.length; i++) {
-  exitButtons[i].addEventListener("click", closePopup);
-}
+exitButtons.forEach(function (item) {
+  item.addEventListener("click", closePopup);
+});
 
 addButton.addEventListener('click', clickAddButton);
 editButton.addEventListener('click', clickEditButton);
 imageExit.addEventListener('click', closePopup);
+editSave.addEventListener('click', changeInputs);
+cardCreate.addEventListener('click', createNewCard);
 
 checkCardImages();
 checkLikeButton();

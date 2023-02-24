@@ -7,3 +7,9 @@
   flex-direction: column;
   row-gap: 50px;
 }
+
+@media screen and (max-width: 894px) {
+  .page {
+    margin: auto;
+  }
+}
