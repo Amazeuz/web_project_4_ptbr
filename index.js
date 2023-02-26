@@ -1,15 +1,15 @@
 const gallery = document.querySelector('.gallery');
+const opacity = document.querySelector('#opacity-block')
 const form = document.querySelector('.form');
 const formImage = document.querySelector('#form-image');
-const opacity = document.querySelector('#opacity-block')
-const addButton = document.querySelector('.profile__add');
 const imageBlock = document.querySelector('.image-click');
+const imageExit = document.querySelector('.image-click__exit');
 const cardImages = document.querySelectorAll('.item__image');
+const cardCreate = document.querySelector('#form__items-create');
 const editButton = document.querySelector('.profile__edit');
+const addButton = document.querySelector('.profile__add');
 const exitButtons = document.querySelectorAll('.form__exit');
 const editSave = document.querySelector('#form__items-save');
-const cardCreate = document.querySelector('#form__items-create');
-const imageExit = document.querySelector('.image-click__exit');
 
 let cardsGallery = [
   {
@@ -75,47 +75,65 @@ function addCardInputs () {
 
 function createCard () {
   while (cardsGallery.length > 0) {
-    gallery.insertAdjacentHTML('afterbegin',
-  `<div class="item">
-    <img class="item__image" src=${cardsGallery[0].link} alt="Imagem inicial adicionada">
-    <img class="item__trash-icon" src='images/trash-icon.svg' alt="Ícone de lixo, para excluir a foto desejada">
-    <div>
-      <h1 class="item__title">${cardsGallery[0].name}</h1>
-      <img src="images/vector__like-button.svg" class="item__like" alt="Um coração com a função de curtir a imagem">
-    </div>
-   </div>`);
-   cardsGallery.shift();
+    const cardContainerElement = document.createElement('div');
+    cardContainerElement.classList.add('item');
 
-  const newLikeButton = document.querySelector('.item__like');
-  const newDeleteCard = document.querySelector('.item__trash-icon');
+    const cardLinkElement = document.createElement('img');
+    cardLinkElement.classList.add('item__image');
+    cardLinkElement.setAttribute('src', cardsGallery[0].link);
 
-  newLikeButton.addEventListener('click', function () {
-    if (newLikeButton.getAttribute('src') === 'images/vector__like-button.svg') {
-      newLikeButton.setAttribute('src', 'images/vector__liked-button.svg');
-    }
-    else {
-      newLikeButton.setAttribute('src', 'images/vector__like-button.svg');
-    }
-  });
-    newDeleteCard.addEventListener('click', function () {
-      newDeleteCard.closest('.item').remove();
+    const cardTrashElement = document.createElement('img');
+    cardTrashElement.classList.add('item__trash-icon');
+    cardTrashElement.setAttribute('src', 'images/trash-icon.svg')
+    cardTrashElement.setAttribute('alt', 'Ícone de lixo, para excluir a foto desejada');
+
+    const cardNewContainerElement = document.createElement('div');
+
+    const cardNameElement = document.createElement('h1');
+    cardNameElement.classList.add('item__title');
+    cardNameElement.textContent = `${cardsGallery[0].name}`
+
+    const cardLikeElement = document.createElement('img');
+    cardLikeElement.classList.add('item__like');
+    cardLikeElement.setAttribute('src', 'images/vector__like-button.svg');
+    cardLikeElement.setAttribute('alt','Um coração com a função de curtir a imagem');
+
+    cardNewContainerElement.append(cardNameElement, cardLikeElement);
+
+    cardContainerElement.append(cardLinkElement, cardTrashElement, cardNewContainerElement);
+    gallery.prepend(cardContainerElement);
+    cardsGallery.shift();
+
+    const newLikeButton = document.querySelector('.item__like');
+    const newDeleteCard = document.querySelector('.item__trash-icon');
+
+    newLikeButton.addEventListener('click', function () {
+      if (newLikeButton.getAttribute('src') === 'images/vector__like-button.svg') {
+        newLikeButton.setAttribute('src', 'images/vector__liked-button.svg');
+      }
+      else {
+        newLikeButton.setAttribute('src', 'images/vector__like-button.svg');
+      }
     });
+      newDeleteCard.addEventListener('click', function () {
+        newDeleteCard.closest('.item').remove();
+      });
 
-    closePopup();
-    expandImage();
+      closePopup();
+      expandImage();
   };
 }
 createCard();
 
-function changeInputs () {
-  const name = document.querySelector('.profile__name');
-  const about = document.querySelector('.profile__about');
+function changeUserInfo () {
+  const oldName = document.querySelector('.profile__name');
+  const oldAbout = document.querySelector('.profile__about');
   const newName = document.querySelector('#form__input-name');
   const newAbout = document.querySelector('#form__input-about');
 
   if (newName.value.length > 0 && newAbout.value.length > 0) {
-    name.textContent = newName.value;
-    about.textContent = newAbout.value;
+    oldName.textContent = newName.value;
+    oldAbout.textContent = newAbout.value;
     newName.value = '';
     newAbout.value = '';
     closePopup();
@@ -137,7 +155,6 @@ function closePopup () {
 
   imageBlock.style.opacity = 0;
   setTimeout(() => { imageBlock.classList.add('image-click_hidden') }, 500);
-
 }
 
 function expandImage () {
@@ -186,7 +203,7 @@ exitButtons.forEach(function (item) {
 addButton.addEventListener('click', clickAddButton);
 editButton.addEventListener('click', clickEditButton);
 imageExit.addEventListener('click', closePopup);
-editSave.addEventListener('click', changeInputs);
+editSave.addEventListener('click', changeUserInfo);
 cardCreate.addEventListener('click', addCardInputs);
 
 expandImage();
