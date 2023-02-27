@@ -1,6 +1,7 @@
 const gallery = document.querySelector('.gallery');
 const opacity = document.querySelector('#opacity-block')
 const form = document.querySelector('.form');
+const formSubmit = document.querySelectorAll('.form__items');
 const formImage = document.querySelector('#form-image');
 const imageBlock = document.querySelector('.image-click');
 const imageExit = document.querySelector('.image-click__exit');
@@ -11,7 +12,7 @@ const addButton = document.querySelector('.profile__add');
 const exitButtons = document.querySelectorAll('.form__exit');
 const editSave = document.querySelector('#form__items-save');
 
-let cardsGallery = [
+const cardsGallery = [
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
@@ -51,27 +52,6 @@ function clickEditButton () {
   setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
   form.classList.remove('form_hidden');
 }
-
-function addCardInputs () {
-  const cardInputName = document.querySelector('#form-image__input-title');
-  const cardInputLink = document.querySelector('#form-image__input-url');
-
-  if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('http')) {
-    cardsGallery.push({name: `${cardInputName.value}`, link: `${cardInputLink.value}`})
-    createCard();
-
-    cardInputName.value = '';
-    cardInputLink.value = '';
-    cardInputName.setAttribute('placeholder', 'Título');
-    cardInputLink.setAttribute('placeholder', 'Link da Imagem');
-  }
-  else {
-    cardInputName.value = '';
-    cardInputLink.value = 'https:';
-    cardInputName.setAttribute('placeholder', 'Preencha os campos corretamente !');
-    cardInputLink.setAttribute('placeholder', 'Preencha os campos corretamente !');
-  }
-};
 
 function createCard () {
   while (cardsGallery.length > 0) {
@@ -123,7 +103,25 @@ function createCard () {
       expandImage();
   };
 }
-createCard();
+
+function addCardInputs () {
+  const cardInputName = document.querySelector('#form-image__input-title');
+  const cardInputLink = document.querySelector('#form-image__input-url');
+
+  if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('http')) {
+    cardsGallery.push({name: `${cardInputName.value}`, link: `${cardInputLink.value}`})
+    createCard();
+
+    cardInputName.setAttribute('placeholder', 'Título');
+    cardInputLink.setAttribute('placeholder', 'Link da Imagem');
+  }
+  else {
+    cardInputName.setAttribute('placeholder', 'Preencha os campos corretamente !');
+    cardInputLink.setAttribute('placeholder', 'Preencha os campos corretamente !');
+  }
+  cardInputName.value = '';
+  cardInputLink.value = '';
+};
 
 function changeUserInfo () {
   const oldName = document.querySelector('.profile__name');
@@ -200,10 +198,19 @@ exitButtons.forEach(function (item) {
   item.addEventListener("click", closePopup);
 });
 
+function submitForm (event) {
+  event.preventDefault();
+}
+
+formSubmit.forEach(function (item) {
+  item.addEventListener('submit', submitForm);
+})
+
 addButton.addEventListener('click', clickAddButton);
 editButton.addEventListener('click', clickEditButton);
 imageExit.addEventListener('click', closePopup);
 editSave.addEventListener('click', changeUserInfo);
 cardCreate.addEventListener('click', addCardInputs);
 
+createCard();
 expandImage();
