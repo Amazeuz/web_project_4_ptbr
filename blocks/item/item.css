@@ -1,12 +1,14 @@
 .item {
+  max-width: 282px;
+  height: 350px;
   background-color: white;
   border-radius: 10px;
-  max-width: 282px;
-  object-fit: cover;
 }
 
 .item > div {
-  max-width: 210px;
+  width: 80%;
+  position: relative;
+  bottom: 22px;
   display: flex;
   justify-content: space-between;
   margin: auto;
