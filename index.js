@@ -5,7 +5,6 @@ const formSubmit = document.querySelectorAll('.form__items');
 const formImage = document.querySelector('#form-image');
 const imageBlock = document.querySelector('.image-click');
 const imageExit = document.querySelector('.image-click__exit');
-const cardImages = document.querySelectorAll('.item__image');
 const cardCreate = document.querySelector('#form__items-create');
 const editButton = document.querySelector('.profile__edit');
 const addButton = document.querySelector('.profile__add');
@@ -84,6 +83,8 @@ function createCard () {
     gallery.prepend(cardContainerElement);
     cardsGallery.shift();
 
+    // o código a seguir é para criar a função de like no card.
+
     const newLikeButton = document.querySelector('.item__like');
     const newDeleteCard = document.querySelector('.item__trash-icon');
 
@@ -102,8 +103,44 @@ function createCard () {
         newDeleteCard.closest('.item').remove();
       });
 
+      // O código a seguir é para aplicar a funionalidade de abrir a imagem ao card.
+
+      const cardImage = gallery.querySelector('.item__image');
+      const cardImageName = gallery.querySelector('.item__title');
+      const image = imageBlock.querySelector('.image-click-open');
+
+      cardImage.addEventListener('click', function () {
+        imageBlock.style.opacity = 1;
+        setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
+        opacity.classList.add('page-opacity');
+
+        imageBlock.classList.remove('image-click_hidden');
+        image.setAttribute('src', cardImage.getAttribute('src'));
+        imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
+
+        // O código a seguir é para redimensionar a imagem quando aberta.
+
+        const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth;
+        const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight;
+
+        let divisionValue = 0
+        imageSizeArray = [0, 50, 100, 150, 200, 300, 400, 500];
+        divisionArray = [0.5, 1, 1.2, 1.7, 2.5, 3.8, 5, 8];
+
+        for (let i = 0; i < imageSizeArray.length; i++) {
+          if (imageWidthPercentage > imageSizeArray[i] || imageHeightPercentage > imageSizeArray[i]) {
+            continue;
+          }
+          else {
+            divisionValue = divisionArray[i];
+            break;
+          }
+        }
+          imageBlock.style.width = `${imageWidthPercentage / divisionValue}%`;
+          imageBlock.style.height = `${imageHeightPercentage / divisionValue}%`;
+      });
+
       closePopup();
-      expandImage();
   };
 }
 
@@ -158,45 +195,6 @@ function closePopup () {
   setTimeout(() => { imageBlock.classList.add('image-click_hidden') }, 500);
 }
 
-function expandImage () {
-  const cardImages = gallery.querySelectorAll('.item__image');
-  const cardImagesNames = gallery.querySelectorAll('.item__title');
-  const image = imageBlock.querySelector('.image-click-open');
-
-  for (let i = 0; i < cardImages.length; i++) {
-    cardImages[i].addEventListener('click', function () {
-      imageBlock.style.opacity = 1;
-      setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
-      opacity.classList.add('page-opacity');
-
-      imageBlock.classList.remove('image-click_hidden');
-      image.setAttribute('src', cardImages[i].getAttribute('src'));
-      imageBlock.querySelector('.image-click__name').textContent = cardImagesNames[i].textContent;
-
-      // O Código a seguir é usado para redimensionar a imagem quando aberta.
-
-      const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth;
-      const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight;
-
-      let divisionValue = 0
-      imageSizeArray = [0, 50, 100, 150, 200, 300, 400, 500];
-      divisionArray = [0.5, 1, 1.2, 1.7, 2.5, 3.8, 5, 8];
-
-      for (let i = 0; i < imageSizeArray.length; i++) {
-        if (imageWidthPercentage > imageSizeArray[i] || imageHeightPercentage > imageSizeArray[i]) {
-          continue;
-        }
-        else {
-          divisionValue = divisionArray[i];
-          break;
-        }
-      }
-        imageBlock.style.width = `${imageWidthPercentage / divisionValue}%`;
-        imageBlock.style.height = `${imageHeightPercentage / divisionValue}%`;
-    });
-  }
-}
-
 exitButtons.forEach(function (item) {
   item.addEventListener("click", closePopup);
 });
@@ -216,4 +214,3 @@ editSave.addEventListener('click', changeUserInfo);
 cardCreate.addEventListener('click', addCardInputs);
 
 createCard();
-expandImage();
