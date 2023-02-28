@@ -87,12 +87,15 @@ function createCard () {
     const newLikeButton = document.querySelector('.item__like');
     const newDeleteCard = document.querySelector('.item__trash-icon');
 
+    let likedButton = false
     newLikeButton.addEventListener('click', function () {
-      if (newLikeButton.getAttribute('src') === 'images/vector__like-button.svg') {
+      if (!likedButton) {
         newLikeButton.setAttribute('src', 'images/vector__liked-button.svg');
+        likedButton = true
       }
       else {
         newLikeButton.setAttribute('src', 'images/vector__like-button.svg');
+        likedButton = false
       }
     });
       newDeleteCard.addEventListener('click', function () {
