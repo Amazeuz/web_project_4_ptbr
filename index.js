@@ -11,7 +11,7 @@ const addButton = document.querySelector('.profile__add');
 const exitButtons = document.querySelectorAll('.form__exit');
 const editSave = document.querySelector('#form__items-save');
 
-const cardsGallery = [
+let cardsGallery = [
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
@@ -53,13 +53,13 @@ function clickEditButton () {
 }
 
 function createCard () {
-  while (cardsGallery.length > 0) {
+  cardsGallery.forEach(function (item, index) {
     const cardContainerElement = document.createElement('div');
     cardContainerElement.classList.add('item');
 
     const cardLinkElement = document.createElement('img');
     cardLinkElement.classList.add('item__image');
-    cardLinkElement.setAttribute('src', cardsGallery[0].link);
+    cardLinkElement.setAttribute('src', cardsGallery[index].link);
 
     const cardTrashElement = document.createElement('img');
     cardTrashElement.classList.add('item__trash-icon');
@@ -70,7 +70,7 @@ function createCard () {
 
     const cardNameElement = document.createElement('h1');
     cardNameElement.classList.add('item__title');
-    cardNameElement.textContent = `${cardsGallery[0].name}`
+    cardNameElement.textContent = `${cardsGallery[index].name}`
 
     const cardLikeElement = document.createElement('img');
     cardLikeElement.classList.add('item__like');
@@ -81,7 +81,6 @@ function createCard () {
 
     cardContainerElement.append(cardLinkElement, cardTrashElement, cardNewContainerElement);
     gallery.prepend(cardContainerElement);
-    cardsGallery.shift();
 
     // o código a seguir é para criar a função de like no card.
 
@@ -119,7 +118,8 @@ function createCard () {
       imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
     });
     closePopup();
-  };
+  });
+  cardsGallery = [];
 }
 
 function addCardInputs () {
