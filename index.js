@@ -11,7 +11,7 @@ const addButton = document.querySelector('.profile__add');
 const exitButtons = document.querySelectorAll('.form__exit');
 const editSave = document.querySelector('#form__items-save');
 
-let cardsGallery = [
+const cardsGallery = [
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
@@ -52,74 +52,71 @@ function clickEditButton () {
   form.classList.remove('form_hidden');
 }
 
-function createCard () {
-  cardsGallery.forEach(function (item, index) {
-    const cardContainerElement = document.createElement('div');
-    cardContainerElement.classList.add('item');
+function createCard (cardLink, cardName) {
+  const cardContainerElement = document.createElement('div');
+  cardContainerElement.classList.add('item');
 
-    const cardLinkElement = document.createElement('img');
-    cardLinkElement.classList.add('item__image');
-    cardLinkElement.setAttribute('src', cardsGallery[index].link);
+  const cardLinkElement = document.createElement('img');
+  cardLinkElement.classList.add('item__image');
+  cardLinkElement.setAttribute('src', cardLink);
 
-    const cardTrashElement = document.createElement('img');
-    cardTrashElement.classList.add('item__trash-icon');
-    cardTrashElement.setAttribute('src', 'images/trash-icon.svg')
-    cardTrashElement.setAttribute('alt', 'Ícone de lixo, para excluir a foto desejada');
+  const cardTrashElement = document.createElement('img');
+  cardTrashElement.classList.add('item__trash-icon');
+  cardTrashElement.setAttribute('src', 'images/trash-icon.svg')
+  cardTrashElement.setAttribute('alt', 'Ícone de lixo, para excluir a foto desejada');
 
-    const cardNewContainerElement = document.createElement('div');
+  const cardNewContainerElement = document.createElement('div');
 
-    const cardNameElement = document.createElement('h1');
-    cardNameElement.classList.add('item__title');
-    cardNameElement.textContent = `${cardsGallery[index].name}`
+  const cardNameElement = document.createElement('h1');
+  cardNameElement.classList.add('item__title');
+  cardNameElement.textContent = `${cardName}`
 
-    const cardLikeElement = document.createElement('img');
-    cardLikeElement.classList.add('item__like');
-    cardLikeElement.setAttribute('src', 'images/vector__like-button.svg');
-    cardLikeElement.setAttribute('alt','Um coração com a função de curtir a imagem');
+  const cardLikeElement = document.createElement('img');
+  cardLikeElement.classList.add('item__like');
+  cardLikeElement.setAttribute('src', 'images/vector__like-button.svg');
+  cardLikeElement.setAttribute('alt','Um coração com a função de curtir a imagem');
 
-    cardNewContainerElement.append(cardNameElement, cardLikeElement);
+  cardNewContainerElement.append(cardNameElement, cardLikeElement);
 
-    cardContainerElement.append(cardLinkElement, cardTrashElement, cardNewContainerElement);
-    gallery.prepend(cardContainerElement);
+  cardContainerElement.append(cardLinkElement, cardTrashElement, cardNewContainerElement);
+  gallery.prepend(cardContainerElement);
 
-    // o código a seguir é para criar a função de like no card.
+  // o código a seguir é para criar a função de like no card.
 
-    const newLikeButton = document.querySelector('.item__like');
-    const newDeleteCard = document.querySelector('.item__trash-icon');
+  const newLikeButton = document.querySelector('.item__like');
+  const newDeleteCard = document.querySelector('.item__trash-icon');
 
-    let likedButton = false
-    newLikeButton.addEventListener('click', function () {
-      if (!likedButton) {
-        newLikeButton.setAttribute('src', 'images/vector__liked-button.svg');
-        likedButton = true
-      }
-      else {
-        newLikeButton.setAttribute('src', 'images/vector__like-button.svg');
-        likedButton = false
-      }
-    });
-    newDeleteCard.addEventListener('click', function () {
-      newDeleteCard.closest('.item').remove();
-    });
-
-      // O código a seguir é para aplicar a funionalidade de abrir a imagem ao card.
-
-    const cardImage = gallery.querySelector('.item__image');
-    const cardImageName = gallery.querySelector('.item__title');
-    const image = imageBlock.querySelector('.image-click-open');
-
-    cardImage.addEventListener('click', function () {
-      imageBlock.style.opacity = 1;
-      setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
-      opacity.classList.add('page-opacity');
-
-      imageBlock.classList.remove('image-click_hidden');
-      image.setAttribute('src', cardImage.getAttribute('src'));
-      imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
-    });
-    closePopup();
+  let likedButton = false
+  newLikeButton.addEventListener('click', function () {
+    if (!likedButton) {
+      newLikeButton.setAttribute('src', 'images/vector__liked-button.svg');
+      likedButton = true
+    }
+    else {
+      newLikeButton.setAttribute('src', 'images/vector__like-button.svg');
+      likedButton = false
+    }
   });
-  cardsGallery = [];
+  newDeleteCard.addEventListener('click', function () {
+    newDeleteCard.closest('.item').remove();
+  });
+
+  // O código a seguir é para aplicar a funionalidade de abrir a imagem ao card.
+
+  const cardImage = gallery.querySelector('.item__image');
+  const cardImageName = gallery.querySelector('.item__title');
+  const image = imageBlock.querySelector('.image-click-open');
+
+  cardImage.addEventListener('click', function () {
+    imageBlock.style.opacity = 1;
+    setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
+    opacity.classList.add('page-opacity');
+
+    imageBlock.classList.remove('image-click_hidden');
+    image.setAttribute('src', cardImage.getAttribute('src'));
+    imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
+  });
+  closePopup();
 }
 
 function addCardInputs () {
@@ -127,8 +124,7 @@ function addCardInputs () {
   const cardInputLink = document.querySelector('#form-image__input-url');
 
   if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('http')) {
-    cardsGallery.push({name: `${cardInputName.value}`, link: `${cardInputLink.value}`})
-    createCard();
+    createCard(cardInputLink.value, cardInputName.value);
 
     cardInputName.setAttribute('placeholder', 'Título');
     cardInputLink.setAttribute('placeholder', 'Link da Imagem');
@@ -191,4 +187,6 @@ imageExit.addEventListener('click', closePopup);
 editSave.addEventListener('click', changeUserInfo);
 cardCreate.addEventListener('click', addCardInputs);
 
-createCard();
+cardsGallery.forEach( function (item) {
+  createCard(item.link, item.name);
+})
