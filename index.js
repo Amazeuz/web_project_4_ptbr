@@ -99,48 +99,26 @@ function createCard () {
         likedButton = false
       }
     });
-      newDeleteCard.addEventListener('click', function () {
-        newDeleteCard.closest('.item').remove();
-      });
+    newDeleteCard.addEventListener('click', function () {
+      newDeleteCard.closest('.item').remove();
+    });
 
       // O código a seguir é para aplicar a funionalidade de abrir a imagem ao card.
 
-      const cardImage = gallery.querySelector('.item__image');
-      const cardImageName = gallery.querySelector('.item__title');
-      const image = imageBlock.querySelector('.image-click-open');
+    const cardImage = gallery.querySelector('.item__image');
+    const cardImageName = gallery.querySelector('.item__title');
+    const image = imageBlock.querySelector('.image-click-open');
 
-      cardImage.addEventListener('click', function () {
-        imageBlock.style.opacity = 1;
-        setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
-        opacity.classList.add('page-opacity');
+    cardImage.addEventListener('click', function () {
+      imageBlock.style.opacity = 1;
+      setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
+      opacity.classList.add('page-opacity');
 
-        imageBlock.classList.remove('image-click_hidden');
-        image.setAttribute('src', cardImage.getAttribute('src'));
-        imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
-
-        // O código a seguir é para redimensionar a imagem quando aberta.
-
-        const imageWidthPercentage = (image.naturalWidth * 100) / window.innerWidth;
-        const imageHeightPercentage = (image.naturalHeight * 100) / window.innerHeight;
-
-        let divisionValue = 0
-        imageSizeArray = [0, 50, 100, 150, 200, 300, 400, 500];
-        divisionArray = [0.5, 1, 1.2, 1.7, 2.5, 3.8, 5, 8];
-
-        for (let i = 0; i < imageSizeArray.length; i++) {
-          if (imageWidthPercentage > imageSizeArray[i] || imageHeightPercentage > imageSizeArray[i]) {
-            continue;
-          }
-          else {
-            divisionValue = divisionArray[i];
-            break;
-          }
-        }
-          imageBlock.style.width = `${imageWidthPercentage / divisionValue}%`;
-          imageBlock.style.height = `${imageHeightPercentage / divisionValue}%`;
-      });
-
-      closePopup();
+      imageBlock.classList.remove('image-click_hidden');
+      image.setAttribute('src', cardImage.getAttribute('src'));
+      imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
+    });
+    closePopup();
   };
 }
 

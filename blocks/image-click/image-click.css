@@ -1,6 +1,6 @@
 .image-click {
   position: fixed;
-  display: inline-block;
+  display: flex;
   margin: auto;
   top: 0;
   bottom: 0;
