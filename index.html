@@ -34,22 +34,34 @@
   </div>
   <section class="form form_hidden">
     <img src="images/vector__add.svg" class="form__exit" alt="Botão de fechar o pop-up">
-    <form class="form__items">
+    <form name="info" class="form__items">
       <h1 class="form__title">Editar Perfil</h1>
       <fieldset class="form__input-container">
-        <input class="form__input" id="form__input-name" type="text" placeholder="Nome">
-        <input class="form__input" id="form__input-about" type="text" placeholder="Sobre mim">
+        <label class="form__field">
+          <input name="name" type='text' class="form__input" id="form__input-name" placeholder="Nome" minlength="2" maxlength="40" required>
+          <span class="form__input-error_active"></span>
+        </label>
+        <label class="form__field">
+          <input name="about" type='text' class="form__input" id="form__input-about" placeholder="Sobre mim" minlength="2" maxlength="200" required>
+          <span class="form__input-error_active"></span>
+        </label>
       </fieldset>
       <button type="submit" id="form__items-save" class="form__button">Salvar</button>
     </form>
   </section>
   <section class="form form_hidden" id='form-image'>
     <img src="images/vector__add.svg" class="form__exit" alt="Botão de fechar o pop-up">
-    <form class="form__items">
+    <form name="place" class="form__items">
       <h1 class="form__title">Novo local</h1>
       <fieldset class="form__input-container">
-        <input class="form__input" id="form-image__input-title" type="text" placeholder="Título">
-        <input class="form__input" id="form-image__input-url" type="text" placeholder="Link de imagem">
+        <label class="form__field">
+          <input class="form__input" id="form-image__input-title" type="text" placeholder="Título" minlength="2" maxlength="30" required>
+          <span class="form__input-error_active"></span>
+        </label>
+        <label class="form__field">
+          <input class="form__input" id="form-image__input-url" type="url" placeholder="Link de imagem">
+          <span class="form__input-error_active"></span>
+        </label>
       </fieldset>
       <button type="submit" id="form__items-create" class="form__button">Criar</button>
     </form>
@@ -62,5 +74,6 @@
     </div>
   </section>
   <script src="index.js"></script>
+  <script src="validate.js"></script>
 </body>
 </html>
