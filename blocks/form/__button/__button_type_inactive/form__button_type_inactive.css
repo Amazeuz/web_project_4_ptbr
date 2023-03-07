@@ -1,0 +1,6 @@
+.form__buttom_type_inactive {
+  background-color: white;
+  color: grey;
+  border: 1px solid grey;
+  pointer-events: none;
+}
