@@ -1,6 +1,6 @@
 Around the U.S
 
-Around the U.S é uma página de perfil que tem como características a exibição e edição de nome, informações, com uma galeria de imagens, além de uma série de funcionalidades como adicionar sua própria imagem, exclui-la e expandi-la.
+Around the U.S é uma página de perfil que tem como características a exibição e edição de nome, informações, com uma galeria de imagens, além de uma série de funcionalidades como validação de formulário, adicionar sua própria imagem, exclui-la e expandi-la.
 
 A página é altamente responsiva, com diferentes layouts para diferentes tipos de dispositivos:
 
