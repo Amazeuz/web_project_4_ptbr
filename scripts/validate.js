@@ -65,4 +65,5 @@ function enableValidation () {
   });
   pressEscKey();
 }
+
 enableValidation();
