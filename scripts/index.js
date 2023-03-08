@@ -1,5 +1,5 @@
+const opacity = document.querySelector('#opacity-block');
 const gallery = document.querySelector('.gallery');
-const opacity = document.querySelector('#opacity-block')
 const form = document.querySelector('.form');
 const formSubmit = document.querySelectorAll('.form__items');
 const formImage = document.querySelector('#form-image');
@@ -10,6 +10,7 @@ const editButton = document.querySelector('.profile__edit');
 const addButton = document.querySelector('.profile__add');
 const exitButtons = document.querySelectorAll('.form__exit');
 const editSave = document.querySelector('#form__items-save');
+
 
 const cardsGallery = [
   {
@@ -41,14 +42,12 @@ const cardsGallery = [
 function clickAddButton () {
   formImage.style.opacity = 1;
   opacity.classList.add('page-opacity');
-  setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
   formImage.classList.remove('form_hidden');
 }
 
 function clickEditButton () {
   form.style.opacity = 1;
   opacity.classList.add('page-opacity');
-  setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
   form.classList.remove('form_hidden');
 }
 
@@ -109,7 +108,6 @@ function createCard (cardLink, cardName) {
 
   cardImage.addEventListener('click', function () {
     imageBlock.style.opacity = 1;
-    setTimeout(() => { opacity.style.pointerEvents = 'none'; }, 500);
     opacity.classList.add('page-opacity');
 
     imageBlock.classList.remove('image-click_hidden');
@@ -127,15 +125,11 @@ function addCardInputs () {
     createCard(cardInputLink.value, cardInputName.value);
 
     cardInputName.setAttribute('placeholder', 'Título');
-    cardInputLink.setAttribute('placeholder', 'Link da Imagem');
-  }
-  else {
-    cardInputName.setAttribute('placeholder', 'Preencha os campos corretamente !');
-    cardInputLink.setAttribute('placeholder', 'Preencha os campos corretamente !');
+    cardInputLink.setAttribute('placeholder', 'URL da Imagem');
   }
   cardInputName.value = '';
   cardInputLink.value = '';
-};
+}
 
 function changeUserInfo () {
   const oldName = document.querySelector('.profile__name');
@@ -150,36 +144,24 @@ function changeUserInfo () {
     newAbout.value = '';
     closePopup();
   }
-  else {
-    newName.setAttribute('placeholder', 'Preencha os campos !');
-    newAbout.setAttribute('placeholder', 'Preencha os campos !');
-  }
 }
 
 function closePopup () {
   opacity.classList.remove('page-opacity');
-  setTimeout(() => { opacity.style.pointerEvents = 'all'; }, 500);
 
-  form.style.opacity = 0;
+  const blocks = [form, formImage, imageBlock];
+  blocks.forEach((block) => {
+    block.style.opacity = 0;
+  });
+
   setTimeout(() => { form.classList.add('form_hidden'); }, 500);
-  formImage.style.opacity = 0;
   setTimeout(() => { formImage.classList.add('form_hidden'); }, 500);
-
-  imageBlock.style.opacity = 0;
   setTimeout(() => { imageBlock.classList.add('image-click_hidden') }, 500);
 }
 
 exitButtons.forEach(function (item) {
   item.addEventListener("click", closePopup);
 });
-
-function submitForm (event) {
-  event.preventDefault();
-}
-
-formSubmit.forEach(function (item) {
-  item.addEventListener('submit', submitForm);
-})
 
 addButton.addEventListener('click', clickAddButton);
 editButton.addEventListener('click', clickEditButton);
