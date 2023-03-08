@@ -1,12 +1,4 @@
-const forms = document.forms;
-
-function clickOutsidePopup () {
-  form.forEach((item) => {
-    item.addEventListener('change', closePopup);
-  })
-}
-
-clickOutsidePopup();
+const formList = document.forms;
 
 function pressEscKey () {
   document.addEventListener('keydown', function (evt) {
@@ -50,21 +42,22 @@ function toggleButtonState (inputList, buttonElement) {
 
 function insertEventListeners (formElement) {
   const formInputs = Array.from(formElement.querySelectorAll('.form__input'));
-  const formButton = formElement.querySelector('.form__button');
-  toggleButtonState(formInputs, formButton);
+  const buttonElement = formElement.querySelector('.form__button');
+  toggleButtonState(formInputs, buttonElement);
 
   formInputs.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(inputElement);
-      toggleButtonState(formInputs, formButton);
+      toggleButtonState(formInputs, buttonElement);
     });
   });
 }
 
 function enableValidation () {
-  const forms = document.forms;
-  Array.from(forms).forEach((formElement) => {
+  const formList = document.forms;
+  Array.from(formList).forEach((formElement) => {
     preventSubmitRefresh(formElement);
+
     const fieldsetList = formElement.querySelectorAll(".form__input-container");
     fieldsetList.forEach((fieldset) => {
       insertEventListeners(fieldset);
@@ -72,9 +65,4 @@ function enableValidation () {
   });
   pressEscKey();
 }
-
-Array.from(document.querySelectorAll('form__button')).forEach((button) => {
-  button.classList.add('form__button_type_inactive');
-});
-
 enableValidation();

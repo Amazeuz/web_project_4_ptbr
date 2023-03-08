@@ -11,7 +11,6 @@ const addButton = document.querySelector('.profile__add');
 const exitButtons = document.querySelectorAll('.form__exit');
 const editSave = document.querySelector('#form__items-save');
 
-
 const cardsGallery = [
   {
     name: "Lago di Braies",
@@ -39,16 +38,22 @@ const cardsGallery = [
   },
 ];
 
+function clickOutsidePopup () {
+  setTimeout(() => { opacity.addEventListener('click', closePopup); }, 500);
+}
+
 function clickAddButton () {
   formImage.style.opacity = 1;
   opacity.classList.add('page-opacity');
   formImage.classList.remove('form_hidden');
+  clickOutsidePopup();
 }
 
 function clickEditButton () {
   form.style.opacity = 1;
   opacity.classList.add('page-opacity');
   form.classList.remove('form_hidden');
+  clickOutsidePopup();
 }
 
 function createCard (cardLink, cardName) {
@@ -100,7 +105,7 @@ function createCard (cardLink, cardName) {
     newDeleteCard.closest('.item').remove();
   });
 
-  // O código a seguir é para aplicar a funionalidade de abrir a imagem ao card.
+  // O código a seguir é para aplicar a função de abrir a imagem ao card.
 
   const cardImage = gallery.querySelector('.item__image');
   const cardImageName = gallery.querySelector('.item__title');
@@ -109,10 +114,13 @@ function createCard (cardLink, cardName) {
   cardImage.addEventListener('click', function () {
     imageBlock.style.opacity = 1;
     opacity.classList.add('page-opacity');
-
     imageBlock.classList.remove('image-click_hidden');
     image.setAttribute('src', cardImage.getAttribute('src'));
     imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
+
+    // O código a seguir é para aplicar a fução de fechar a imagem com um clique fora dela.
+
+    imageBlock.addEventListener('click', closePopup);
   });
   closePopup();
 }
@@ -157,6 +165,7 @@ function closePopup () {
   setTimeout(() => { form.classList.add('form_hidden'); }, 500);
   setTimeout(() => { formImage.classList.add('form_hidden'); }, 500);
   setTimeout(() => { imageBlock.classList.add('image-click_hidden') }, 500);
+  opacity.removeEventListener('click', closePopup);
 }
 
 exitButtons.forEach(function (item) {
@@ -171,4 +180,4 @@ cardCreate.addEventListener('click', addCardInputs);
 
 cardsGallery.forEach( function (item) {
   createCard(item.link, item.name);
-})
+});
