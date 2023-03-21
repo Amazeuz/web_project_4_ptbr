@@ -58,7 +58,7 @@ function createCard (cardLink, cardName) {
 
   cardImage.addEventListener('click', function () {
     index.imageBlock.style.opacity = 1;
-    opacity.classList.add('page-opacity');
+    index.opacity.classList.add('page-opacity');
     index.imageBlock.classList.remove('image-click_hidden');
     image.setAttribute('src', cardImage.getAttribute('src'));
     index.imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;

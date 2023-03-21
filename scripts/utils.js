@@ -7,6 +7,24 @@ const editSave = document.querySelector('#form__items-save');
 const exitButtons = document.querySelectorAll('.form__exit');
 const cardCreate = document.querySelector('#form__items-create');
 
+function clickOutsidePopup () {
+  setTimeout(() => { index.opacity.addEventListener('click', closePopup); }, 500);
+}
+
+function clickAddButton () {
+  index.formImage.style.opacity = 1;
+  index.opacity.classList.add('page-opacity');
+  index.formImage.classList.remove('form_hidden');
+  clickOutsidePopup();
+}
+
+function clickEditButton () {
+  index.form.style.opacity = 1;
+  index.opacity.classList.add('page-opacity');
+  index.form.classList.remove('form_hidden');
+  clickOutsidePopup();
+}
+
 function closePopup () {
   index.opacity.classList.remove('page-opacity');
 
@@ -25,8 +43,8 @@ exitButtons.forEach(function (item) {
   item.addEventListener("click", closePopup);
 });
 
-addButton.addEventListener('click', index.clickAddButton);
-editButton.addEventListener('click', index.clickEditButton);
+addButton.addEventListener('click', clickAddButton);
+editButton.addEventListener('click', clickEditButton);
 imageExit.addEventListener('click', closePopup);
 editSave.addEventListener('click', index.changeUserInfo);
 cardCreate.addEventListener('click', index.addCardInputs);

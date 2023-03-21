@@ -34,25 +34,6 @@ const cardsGallery = [
   },
 ];
 
-function clickOutsidePopup () {
-  setTimeout(() => { opacity.addEventListener('click', utils.closePopup); }, 500);
-}
-
-function clickAddButton () {
-  formImage.style.opacity = 1;
-  opacity.classList.add('page-opacity');
-  formImage.classList.remove('form_hidden');
-  clickOutsidePopup();
-}
-
-function clickEditButton () {
-  form.style.opacity = 1;
-  opacity.classList.add('page-opacity');
-  form.classList.remove('form_hidden');
-  clickOutsidePopup();
-}
-
-
 function addCardInputs () {
   const cardInputName = document.querySelector('#form-image__input-title');
   const cardInputLink = document.querySelector('#form-image__input-url');
@@ -86,4 +67,4 @@ cardsGallery.forEach( function (item) {
   createCard(item.link, item.name);
 });
 
-export {opacity, form, formImage, imageBlock, clickAddButton, clickEditButton, changeUserInfo, addCardInputs, gallery}
+export {opacity, form, formImage, imageBlock, changeUserInfo, addCardInputs, gallery}
