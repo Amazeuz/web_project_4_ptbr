@@ -1,15 +1,10 @@
+import * as utils from './utils.js';
+
 const opacity = document.querySelector('#opacity-block');
 const gallery = document.querySelector('.gallery');
 const form = document.querySelector('.form');
-const formSubmit = document.querySelectorAll('.form__items');
 const formImage = document.querySelector('#form-image');
 const imageBlock = document.querySelector('.image-click');
-const imageExit = document.querySelector('.image-click__exit');
-const cardCreate = document.querySelector('#form__items-create');
-const editButton = document.querySelector('.profile__edit');
-const addButton = document.querySelector('.profile__add');
-const exitButtons = document.querySelectorAll('.form__exit');
-const editSave = document.querySelector('#form__items-save');
 
 const cardsGallery = [
   {
@@ -39,7 +34,7 @@ const cardsGallery = [
 ];
 
 function clickOutsidePopup () {
-  setTimeout(() => { opacity.addEventListener('click', closePopup); }, 500);
+  setTimeout(() => { opacity.addEventListener('click', utils.closePopup); }, 500);
 }
 
 function clickAddButton () {
@@ -120,9 +115,9 @@ function createCard (cardLink, cardName) {
 
     // O código a seguir é para aplicar a fução de fechar a imagem com um clique fora dela.
 
-    imageBlock.addEventListener('click', closePopup);
+    imageBlock.addEventListener('click', utils.closePopup);
   });
-  closePopup();
+  utils.closePopup();
 }
 
 function addCardInputs () {
@@ -150,34 +145,12 @@ function changeUserInfo () {
     oldAbout.textContent = newAbout.value;
     newName.value = '';
     newAbout.value = '';
-    closePopup();
+    utils.closePopup();
   }
 }
-
-function closePopup () {
-  opacity.classList.remove('page-opacity');
-
-  const blocks = [form, formImage, imageBlock];
-  blocks.forEach((block) => {
-    block.style.opacity = 0;
-  });
-
-  setTimeout(() => { form.classList.add('form_hidden'); }, 500);
-  setTimeout(() => { formImage.classList.add('form_hidden'); }, 500);
-  setTimeout(() => { imageBlock.classList.add('image-click_hidden') }, 500);
-  opacity.removeEventListener('click', closePopup);
-}
-
-exitButtons.forEach(function (item) {
-  item.addEventListener("click", closePopup);
-});
-
-addButton.addEventListener('click', clickAddButton);
-editButton.addEventListener('click', clickEditButton);
-imageExit.addEventListener('click', closePopup);
-editSave.addEventListener('click', changeUserInfo);
-cardCreate.addEventListener('click', addCardInputs);
 
 cardsGallery.forEach( function (item) {
   createCard(item.link, item.name);
 });
+
+export {opacity, form, formImage, imageBlock, clickAddButton, clickEditButton, changeUserInfo, addCardInputs}
