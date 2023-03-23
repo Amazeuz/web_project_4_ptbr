@@ -1,73 +1,68 @@
 import * as index from './index.js'
 import * as utils from './utils.js'
 
-function createCard (cardLink, cardName) {
-  const cardContainerElement = document.createElement('div');
-  cardContainerElement.classList.add('item');
+let likedButton = false
 
-  const cardLinkElement = document.createElement('img');
-  cardLinkElement.classList.add('item__image');
-  cardLinkElement.setAttribute('src', cardLink);
+class Card {
+  constructor(name, link, template) {
+    this._name = name;
+    this._link = link;
+    this._template = template;
+  }
 
-  const cardTrashElement = document.createElement('img');
-  cardTrashElement.classList.add('item__trash-icon');
-  cardTrashElement.setAttribute('src', 'images/trash-icon.svg')
-  cardTrashElement.setAttribute('alt', 'Ícone de lixo, para excluir a foto desejada');
+  _getTemplate () {
+    const cardTemplate = document.querySelector(this._template).content.querySelector('.item').cloneNode(true);
 
-  const cardNewContainerElement = document.createElement('div');
+    return cardTemplate;
+  }
 
-  const cardNameElement = document.createElement('h1');
-  cardNameElement.classList.add('item__title');
-  cardNameElement.textContent = `${cardName}`
-
-  const cardLikeElement = document.createElement('img');
-  cardLikeElement.classList.add('item__like');
-  cardLikeElement.setAttribute('src', 'images/vector__like-button.svg');
-  cardLikeElement.setAttribute('alt','Um coração com a função de curtir a imagem');
-
-  cardNewContainerElement.append(cardNameElement, cardLikeElement);
-
-  cardContainerElement.append(cardLinkElement, cardTrashElement, cardNewContainerElement);
-  index.gallery.prepend(cardContainerElement);
-
-  // o código a seguir é para criar a função de like no card.
-
-  const newLikeButton = document.querySelector('.item__like');
-  const newDeleteCard = document.querySelector('.item__trash-icon');
-
-  let likedButton = false
-  newLikeButton.addEventListener('click', function () {
+  _likeFunction() {
     if (!likedButton) {
-      newLikeButton.setAttribute('src', 'images/vector__liked-button.svg');
+      this._element.querySelector('.item__like').setAttribute('src', 'images/vector__liked-button.svg');
       likedButton = true
     }
     else {
-      newLikeButton.setAttribute('src', 'images/vector__like-button.svg');
+      this._element.querySelector('.item__like').setAttribute('src', 'images/vector__like-button.svg');
       likedButton = false
     }
-  });
-  newDeleteCard.addEventListener('click', function () {
-    newDeleteCard.closest('.item').remove();
-  });
+  }
 
-  // O código a seguir é para aplicar a função de abrir a imagem ao card.
+  _deleteFunction() {
+    this._element.closest('.item').remove();
+  }
 
-  const cardImage = index.gallery.querySelector('.item__image');
-  const cardImageName = index.gallery.querySelector('.item__title');
-  const image = index.imageBlock.querySelector('.image-click-open');
+  _openImage() {
+    const image = index.imageBlock.querySelector('.image-click-open');
 
-  cardImage.addEventListener('click', function () {
     index.imageBlock.style.opacity = 1;
     index.opacity.classList.add('page-opacity');
     index.imageBlock.classList.remove('image-click_hidden');
-    image.setAttribute('src', cardImage.getAttribute('src'));
-    index.imageBlock.querySelector('.image-click__name').textContent = cardImageName.textContent;
-
-    // O código a seguir é para aplicar a fução de fechar a imagem com um clique fora dela.
-
+    image.setAttribute('src', this._link);
+    index.imageBlock.querySelector('.image-click__name').textContent = this._name;
     index.imageBlock.addEventListener('click', utils.closePopup);
-  });
-  utils.closePopup();
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.item__image').addEventListener('click', () => {
+      this._openImage();
+    });
+    this._element.querySelector('.item__trash-icon').addEventListener('click', () => {
+      this._deleteFunction();
+    });
+    this._element.querySelector('.item__like').addEventListener('click', () => {
+      this._likeFunction();
+    });
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+
+    this._element.querySelector('.item__image').setAttribute('src', this._link);
+    this._element.querySelector('.item__title').textContent = this._name
+
+    return this._element;
+  }
 }
 
-export {createCard}
+export {Card}

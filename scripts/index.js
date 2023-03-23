@@ -1,5 +1,5 @@
 import * as utils from './utils.js';
-import { createCard } from './card.js';
+import { Card } from './card.js';
 
 const opacity = document.querySelector('#opacity-block');
 const gallery = document.querySelector('.gallery');
@@ -9,29 +9,29 @@ const imageBlock = document.querySelector('.image-click');
 
 const cardsGallery = [
   {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
-  },
-  {
-    name: "Parque Nacional da Vanoise ",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
+    name: "Vale de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
   },
   {
     name: "Lago Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
   },
   {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+    name: "Montanhas Carecas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
   },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
+  },
+  {
+    name: "Parque Nacional da Vanoise ",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
+  }
 ];
 
 function addCardInputs () {
@@ -39,10 +39,13 @@ function addCardInputs () {
   const cardInputLink = document.querySelector('#form-image__input-url');
 
   if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('http')) {
-    createCard(cardInputLink.value, cardInputName.value);
+    const card = new Card(cardInputName.value, cardInputLink.value, '.default-template')
+    const cardElement = card.generateCard();
+    gallery.prepend(cardElement);
 
     cardInputName.setAttribute('placeholder', 'Título');
     cardInputLink.setAttribute('placeholder', 'URL da Imagem');
+    utils.closePopup();
   }
   cardInputName.value = '';
   cardInputLink.value = '';
@@ -64,7 +67,9 @@ function changeUserInfo () {
 }
 
 cardsGallery.forEach( function (item) {
-  createCard(item.link, item.name);
+  const card = new Card(item.name, item.link, '.default-template');
+  const cardElement = card.generateCard();
+  gallery.append(cardElement)
 });
 
 export {opacity, form, formImage, imageBlock, changeUserInfo, addCardInputs, gallery}
