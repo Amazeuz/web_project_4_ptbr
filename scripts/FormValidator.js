@@ -1,18 +1,21 @@
-import * as utils from './utils.js'
+import {closePopup} from './utils.js'
 
 class FormValidator {
-  constructor(/* formList ,*/ formElement) {
-    //this._formList = formList
+  constructor(config, formElement) {
     this._formElement = formElement;
+    this._input = config.inputSelector;
+    this._button = config.submitButtonSelector;
+    this._inputError = config.inputErrorClass;
+    this._inactiveButton = config.inactiveButtonClass;
   }
 
   _checkInputValidity (inputElement) {
     if (!inputElement.validity.valid) {
-      inputElement.classList.add('form__input_type_error');
+      inputElement.classList.add(this._inputError);
       inputElement.nextElementSibling.textContent = inputElement.validationMessage;
     }
     else {
-      inputElement.classList.remove('form__input_type_error');
+      inputElement.classList.remove(this._inputError);
       inputElement.nextElementSibling.textContent = ''
     }
   }
@@ -25,22 +28,24 @@ class FormValidator {
 
   _toggleButtonState (inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add("form__button_type_inactive");
+      buttonElement.classList.add(this._inactiveButton);
     }
     else {
-      buttonElement.classList.remove("form__button_type_inactive");
+      buttonElement.classList.remove(this._inactiveButton);
     }
   }
 
   _insertEventListeners(fieldset) {
-    const formInputs = fieldset.querySelectorAll('.form__input');
-    const buttonElement = fieldset.querySelector('.form__button');
+    const formInputs = Array.from(fieldset.querySelectorAll(this._input));
+    const buttonElement = fieldset.querySelector(this._button)
+
     this._toggleButtonState(formInputs, buttonElement);
 
     formInputs.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState(formInputs, buttonElement);
+
       });
     });
   }
@@ -49,22 +54,27 @@ class FormValidator {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    const fieldsetList = this._formElement.querySelectorAll(".form__input-container");
 
-    fieldsetList.forEach((fieldset) => {
+    const fieldsets = this._formElement.querySelectorAll('.form__input-container')
+    fieldsets.forEach((fieldset) => {
       this._insertEventListeners(fieldset);
     });
 
     document.addEventListener('keydown', (evt) => {
       if (evt.key === 'Escape') {
-        utils.closePopup();
+        closePopup();
       }
     });
   }
 }
 
-const formList = document.forms;
+const formConfig = {
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_type_inactive",
+  inputErrorClass: "form__input_type_error",
+}
 
-Array.from(formList).forEach((form) => {
-  new FormValidator(form).enableValidation();
+Array.from(document.forms).forEach((formElement) => {
+  new FormValidator(formConfig, formElement).enableValidation();
 });
