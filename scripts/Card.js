@@ -1,12 +1,11 @@
-import * as index from './index.js'
-import * as utils from './utils.js'
-
-let likedButton = false
+import {closePopup} from './utils.js'
 
 class Card {
-  constructor(name, link, template) {
-    this._name = name;
-    this._link = link;
+  constructor(data, template) {
+    this._name = data.name;
+    this._link = data.link;
+    this._imageModal = data.imageModal;
+    this._pageOpacity = data.pageOpacity;
     this._template = template;
   }
 
@@ -16,41 +15,41 @@ class Card {
     return cardTemplate;
   }
 
-  _likeFunction() {
-    if (!likedButton) {
-      this._element.querySelector('.item__like').setAttribute('src', 'images/vector__liked-button.svg');
-      likedButton = true
-    }
-    else {
-      this._element.querySelector('.item__like').setAttribute('src', 'images/vector__like-button.svg');
-      likedButton = false
-    }
+  _toggleLike() {
+    this._element.querySelector('.item__like').classList.toggle('item__like_type_liked');
   }
 
-  _deleteFunction() {
+  _deleteCard() {
     this._element.closest('.item').remove();
   }
 
-  _openImage() {
-    const image = index.imageBlock.querySelector('.image-click-open');
+  _openImageModal() {
+    const image = this._imageModal.querySelector('.image-click-open');
 
-    index.imageBlock.style.opacity = 1;
-    index.opacity.classList.add('page-opacity');
-    index.imageBlock.classList.remove('image-click_hidden');
+    this._imageModal.classList.add('opacity-style');
+    this._pageOpacity.classList.add('page-opacity');
+    this._imageModal.classList.remove('image-click_hidden');
     image.setAttribute('src', this._link);
-    index.imageBlock.querySelector('.image-click__name').textContent = this._name;
-    index.imageBlock.addEventListener('click', utils.closePopup);
+    this._imageModal.querySelector('.image-click__name').textContent = this._name;
+    this._imageModal.addEventListener('click', closePopup);
+  }
+
+  _handleCardClick(event) {
+    const target = event.target;
+    if (target.classList.contains('item__image')) {
+      this._openImageModal();
+    }
+    else if (target.classList.contains('item__trash-icon')) {
+      this._deleteCard();
+    }
+    else if (target.classList.contains('item__like')) {
+      this._toggleLike();
+    }
   }
 
   _setEventListeners() {
-    this._element.querySelector('.item__image').addEventListener('click', () => {
-      this._openImage();
-    });
-    this._element.querySelector('.item__trash-icon').addEventListener('click', () => {
-      this._deleteFunction();
-    });
-    this._element.querySelector('.item__like').addEventListener('click', () => {
-      this._likeFunction();
+    this._element.addEventListener('click', (event) => {
+      this._handleCardClick(event);
     });
   }
 

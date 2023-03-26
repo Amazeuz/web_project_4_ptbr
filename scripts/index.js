@@ -1,4 +1,4 @@
-import * as utils from './utils.js';
+import {closePopup} from './utils.js';
 import { Card } from './card.js';
 
 const opacity = document.querySelector('#opacity-block');
@@ -34,19 +34,24 @@ const cardsGallery = [
   }
 ];
 
-function addCardInputs () {
+function addNewCard () {
   const cardInputName = document.querySelector('#form-image__input-title');
   const cardInputLink = document.querySelector('#form-image__input-url');
 
-  if (cardInputName.value.length > 0 && cardInputLink.value.length > 0 && cardInputLink.value.startsWith('http')) {
-    const card = new Card(cardInputName.value, cardInputLink.value, '.default-template')
-    const cardElement = card.generateCard();
-    gallery.prepend(cardElement);
-
-    cardInputName.setAttribute('placeholder', 'Título');
-    cardInputLink.setAttribute('placeholder', 'URL da Imagem');
-    utils.closePopup();
+  const cardData = {
+    name: cardInputName.value,
+    link: cardInputLink.value,
+    imageModal: imageBlock,
+    pageOpacity: opacity
   }
+
+  const card = new Card(cardData, '.default-template')
+  const cardElement = card.generateCard();
+  gallery.prepend(cardElement);
+
+  cardInputName.setAttribute('placeholder', 'Título');
+  cardInputLink.setAttribute('placeholder', 'URL da Imagem');
+  closePopup();
   cardInputName.value = '';
   cardInputLink.value = '';
 }
@@ -62,14 +67,21 @@ function changeUserInfo () {
     oldAbout.textContent = newAbout.value;
     newName.value = '';
     newAbout.value = '';
-    utils.closePopup();
+    closePopup();
   }
 }
 
 cardsGallery.forEach( function (item) {
-  const card = new Card(item.name, item.link, '.default-template');
+  const cardData = {
+    name: item.name,
+    link: item.link,
+    imageModal: imageBlock,
+    pageOpacity: opacity
+  }
+
+  const card = new Card(cardData,'.default-template');
   const cardElement = card.generateCard();
   gallery.append(cardElement)
 });
 
-export {opacity, form, formImage, imageBlock, changeUserInfo, addCardInputs, gallery}
+export {opacity, form, formImage, imageBlock, changeUserInfo, addNewCard, gallery}

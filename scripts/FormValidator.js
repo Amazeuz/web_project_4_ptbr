@@ -1,5 +1,3 @@
-import {closePopup} from './utils.js'
-
 class FormValidator {
   constructor(config, formElement) {
     this._formElement = formElement;
@@ -45,7 +43,6 @@ class FormValidator {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState(formInputs, buttonElement);
-
       });
     });
   }
@@ -60,11 +57,6 @@ class FormValidator {
       this._insertEventListeners(fieldset);
     });
 
-    document.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Escape') {
-        closePopup();
-      }
-    });
   }
 }
 
