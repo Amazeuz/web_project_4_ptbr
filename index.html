@@ -32,7 +32,7 @@
       <h1>&#169; 2023 Around The U.S.</h1>
     </footer>
   </div>
-  <section class="form form_hidden">
+  <section class="form popup_hidden" id="form-edit">
     <img src="images/vector__add.svg" class="form__exit" alt="Botão de fechar o pop-up">
     <form name="info" class="form__items" novalidate>
       <h1 class="form__title">Editar Perfil</h1>
@@ -49,7 +49,7 @@
       </fieldset>
     </form>
   </section>
-  <section class="form form_hidden" id='form-image'>
+  <section class="form popup_hidden" id='form-image'>
     <img src="images/vector__add.svg" class="form__exit" alt="Botão de fechar o pop-up">
     <form name="place" class="form__items" novalidate>
       <h1 class="form__title">Novo local</h1>
@@ -66,7 +66,7 @@
       </fieldset>
     </form>
   </section>
-  <section class="image-click image-click_hidden">
+  <section class="image-click popup_hidden">
     <div class="image-click__block">
       <img src="images/vector__add.svg" class="image-click__exit" alt="Botão de fechar o pop-up">
       <img src="#" class='image-click-open' alt="Imagem adicionada pelo usuário">
@@ -84,8 +84,10 @@
     </div>
   </template>
   <script type="module" src="scripts/index.js"></script>
-  <script type="module" src="scripts/FormValidator.js"></script>
-  <script type="module" src="scripts/Card.js"></script>
-  <script type="module" src="scripts/utils.js"></script>
+  <script type="module" src="components/Card.js"></script>
+  <script type="module" src="components/Popup.js"></script>
+  <script type="module" src="components/FormValidator.js"></script>
+  <script type="module" src="utils/utils.js"></script>
+  <script type="module" src="utils/constants.js"></script>
 </body>
 </html>

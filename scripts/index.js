@@ -1,11 +1,5 @@
-import {closePopup} from './utils.js';
-import { Card } from './card.js';
-
-const opacity = document.querySelector('#opacity-block');
-const gallery = document.querySelector('.gallery');
-const form = document.querySelector('.form');
-const formImage = document.querySelector('#form-image');
-const imageBlock = document.querySelector('.image-click');
+import { Card } from '../components/Card.js';
+import {addButton, editButton, exitButtons, form, formImage, gallery, imageBlock, opacity} from '../utils/constants.js'
 
 const cardsGallery = [
   {
@@ -34,7 +28,7 @@ const cardsGallery = [
   }
 ];
 
-function addNewCard () {
+export function addNewCard () {
   const cardInputName = document.querySelector('#form-image__input-title');
   const cardInputLink = document.querySelector('#form-image__input-url');
 
@@ -51,12 +45,12 @@ function addNewCard () {
 
   cardInputName.setAttribute('placeholder', 'Título');
   cardInputLink.setAttribute('placeholder', 'URL da Imagem');
-  closePopup();
+  //closePopup();
   cardInputName.value = '';
   cardInputLink.value = '';
 }
 
-function changeUserInfo () {
+export function changeUserInfo () {
   const oldName = document.querySelector('.profile__name');
   const oldAbout = document.querySelector('.profile__about');
   const newName = document.querySelector('#form__input-name');
@@ -67,7 +61,7 @@ function changeUserInfo () {
     oldAbout.textContent = newAbout.value;
     newName.value = '';
     newAbout.value = '';
-    closePopup();
+    //closePopup();
   }
 }
 
@@ -84,4 +78,11 @@ cardsGallery.forEach( function (item) {
   gallery.append(cardElement)
 });
 
-export {opacity, form, formImage, imageBlock, changeUserInfo, addNewCard, gallery}
+function vas() {
+  console.log('foi')
+}
+
+editButton.addEventListener('click', vas());
+addButton.addEventListener('click', vas());
+
+document.addEventListener('click', console.log('vasqr'))

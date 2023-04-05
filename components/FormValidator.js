@@ -56,7 +56,6 @@ class FormValidator {
     fieldsets.forEach((fieldset) => {
       this._insertEventListeners(fieldset);
     });
-
   }
 }
 
