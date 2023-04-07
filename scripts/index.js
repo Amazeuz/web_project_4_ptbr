@@ -1,5 +1,5 @@
 import { Card } from '../components/Card.js';
-import {addButton, editButton, exitButtons, form, formImage, gallery, imageBlock, opacity} from '../utils/constants.js'
+import { gallery, imageBlock, opacity } from '../utils/constants.js'
 
 const cardsGallery = [
   {
@@ -28,7 +28,7 @@ const cardsGallery = [
   }
 ];
 
-export function addNewCard () {
+export function addNewCard (popupElement) {
   const cardInputName = document.querySelector('#form-image__input-title');
   const cardInputLink = document.querySelector('#form-image__input-url');
 
@@ -45,12 +45,12 @@ export function addNewCard () {
 
   cardInputName.setAttribute('placeholder', 'Título');
   cardInputLink.setAttribute('placeholder', 'URL da Imagem');
-  //closePopup();
+  popupElement.close();
   cardInputName.value = '';
   cardInputLink.value = '';
 }
 
-export function changeUserInfo () {
+export function changeUserInfo (popupElement) {
   const oldName = document.querySelector('.profile__name');
   const oldAbout = document.querySelector('.profile__about');
   const newName = document.querySelector('#form__input-name');
@@ -61,7 +61,7 @@ export function changeUserInfo () {
     oldAbout.textContent = newAbout.value;
     newName.value = '';
     newAbout.value = '';
-    //closePopup();
+    popupElement.close()
   }
 }
 
@@ -77,12 +77,3 @@ cardsGallery.forEach( function (item) {
   const cardElement = card.generateCard();
   gallery.append(cardElement)
 });
-
-function vas() {
-  console.log('foi')
-}
-
-editButton.addEventListener('click', vas());
-addButton.addEventListener('click', vas());
-
-document.addEventListener('click', console.log('vasqr'))

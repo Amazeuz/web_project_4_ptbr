@@ -1,0 +1,9 @@
+POPUP.JS
+
+XXX 1 - Necessário adicionar a função de fechar o popup quando clicado fora do popup.
+XXX 2 - Criar as classes corretamente.
+X?? 3 - Decidir o que fazer com o modal de imagem.
+
+CARD.JS
+
+1 - Trabalhar na gambiarra de abrir e fechar o modal.

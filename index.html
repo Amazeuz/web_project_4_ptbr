@@ -19,11 +19,11 @@
         <div class="profile-info">
           <div>
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button><img src="images/vector__edit.svg" class="profile__edit" alt="Botão de edição dos campos Nome e Sobre"></button>
+            <button><img src="images/vector__edit.svg" class="profile__edit" id="form-edit-trigger" alt="Botão de edição dos campos Nome e Sobre"></button>
           </div>
           <h2 class="profile__about">Explorar</h2>
         </div>
-        <img src="images/vector__add.svg" class="profile__add" alt="Botão de adicionar imagens á galeria">
+        <img src="images/vector__add.svg" class="profile__add" id="form-image-trigger" alt="Botão de adicionar imagens á galeria">
       </section>
       <section class="gallery">
       </section>
@@ -45,7 +45,7 @@
           <input type='text' class="form__input" id="form__input-about" placeholder="Sobre mim" minlength="2" maxlength="200" required>
           <span class="form__input-error"></span>
         </label>
-        <button type="submit" id="form__items-save" class="form__button">Salvar</button>
+        <button type="submit" class="form__button">Salvar</button>
       </fieldset>
     </form>
   </section>
@@ -62,11 +62,11 @@
           <input class="form__input" id="form-image__input-url" type="url" placeholder="URL da imagem" required>
           <span class="form__input-error"></span>
         </label>
-        <button type="submit" id="form__items-create" class="form__button">Criar</button>
+        <button type="submit" class="form__button">Criar</button>
       </fieldset>
     </form>
   </section>
-  <section class="image-click popup_hidden">
+  <section class="image-click image-click_hidden">
     <div class="image-click__block">
       <img src="images/vector__add.svg" class="image-click__exit" alt="Botão de fechar o pop-up">
       <img src="#" class='image-click-open' alt="Imagem adicionada pelo usuário">
@@ -83,11 +83,11 @@
       </div>
     </div>
   </template>
+  <script type="module" src="utils/constants.js"></script>
+  <script type="module" src="utils/utils.js"></script>
   <script type="module" src="scripts/index.js"></script>
   <script type="module" src="components/Card.js"></script>
   <script type="module" src="components/Popup.js"></script>
   <script type="module" src="components/FormValidator.js"></script>
-  <script type="module" src="utils/utils.js"></script>
-  <script type="module" src="utils/constants.js"></script>
 </body>
 </html>

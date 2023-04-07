@@ -42,6 +42,7 @@
 @import url(../blocks/image-click/__block/image-click__block.css);
 @import url(../blocks/image-click/__name/image-click__name.css);
 @import url(../blocks/image-click/__exit/image-click__exit.css);
+@import url(../blocks/image-click/_hidden/image-click_hidden.css);
 @import url(../blocks/image-click-open/image-click-open.css);
 @import url(../blocks/opacity-block/page-opacity.css);
 
