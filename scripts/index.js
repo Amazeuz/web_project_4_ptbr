@@ -1,3 +1,4 @@
+import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Card } from '../components/Card.js';
 import { gallery, imageBlock, opacity } from '../utils/constants.js'
 
@@ -76,4 +77,12 @@ cardsGallery.forEach( function (item) {
   const card = new Card(cardData,'.default-template');
   const cardElement = card.generateCard();
   gallery.append(cardElement)
+
+});
+
+const cardsAdded = Array.from(gallery.querySelectorAll('.item'))
+cardsAdded.forEach( (cardElement) => {
+
+  const newImage = new PopupWithImage(cardElement, imageBlock)
+  newImage.setEventListeners()
 });

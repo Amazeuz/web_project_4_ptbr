@@ -1,4 +1,4 @@
-//import {closePopup} from './utils.js'
+//import { PopupWithImage } from './PopupWithImage.js'
 
 class Card {
   constructor(data, template) {
@@ -23,7 +23,7 @@ class Card {
     this._element.closest('.item').remove();
   }
 
-  _openImageModal() {
+  /*_openImageModal() {
     const image = this._imageModal.querySelector('.image-click-open');
 
     this._imageModal.classList.add('opacity-style');
@@ -41,14 +41,14 @@ class Card {
     this._imageModal.classList.remove('opacity-style');
     this._pageOpacity.classList.remove('page-opacity');
     setTimeout(() => { this._imageModal.classList.add('image-click_hidden') }, 500);
-  }
+  }*/
 
   _handleCardClick(event) {
     const target = event.target;
-    if (target.classList.contains('item__image')) {
-      this._openImageModal();
-    }
-    else if (target.classList.contains('item__trash-icon')) {
+    //if (target.classList.contains('item__image')) {
+    //  this._openImageModal();
+    //}
+    if (target.classList.contains('item__trash-icon')) {
       this._deleteCard();
     }
     else if (target.classList.contains('item__like')) {

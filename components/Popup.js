@@ -1,7 +1,7 @@
 import { opacity } from '../utils/constants.js'
 import { addNewCard, changeUserInfo } from '../scripts/index.js';
 
-class Popup {
+export class Popup {
   constructor(popupElement) {
     this._popupElement = popupElement;
     this._popupOpen = false
