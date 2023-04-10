@@ -83,6 +83,6 @@ cardsGallery.forEach( function (item) {
 const cardsAdded = Array.from(gallery.querySelectorAll('.item'))
 cardsAdded.forEach( (cardElement) => {
 
-  const newImage = new PopupWithImage(cardElement, imageBlock)
+  const newImage = new PopupWithImage(imageBlock, cardElement)
   newImage.setEventListeners()
 });
