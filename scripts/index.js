@@ -1,6 +1,8 @@
 import { PopupWithImage } from '../components/PopupWithImage.js';
-import { Card } from '../components/Card.js';
+import Card from '../components/Card.js';
 import { gallery, imageBlock, opacity } from '../utils/constants.js'
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const cardsGallery = [
   {
@@ -29,42 +31,41 @@ const cardsGallery = [
   }
 ];
 
-export function addNewCard (popupElement) {
-  const cardInputName = document.querySelector('#form-image__input-title');
-  const cardInputLink = document.querySelector('#form-image__input-url');
-
+function addNewCard({firstField, secondField}) {
   const cardData = {
-    name: cardInputName.value,
-    link: cardInputLink.value,
+    name: firstField,
+    link: secondField,
     imageModal: imageBlock,
     pageOpacity: opacity
   }
-
   const card = new Card(cardData, '.default-template')
   const cardElement = card.generateCard();
+  const newImage = new PopupWithImage(imageBlock, cardElement)
+  newImage.setEventListeners()
+
   gallery.prepend(cardElement);
-
-  cardInputName.setAttribute('placeholder', 'Título');
-  cardInputLink.setAttribute('placeholder', 'URL da Imagem');
-  popupElement.close();
-  cardInputName.value = '';
-  cardInputLink.value = '';
 }
 
-export function changeUserInfo (popupElement) {
-  const oldName = document.querySelector('.profile__name');
-  const oldAbout = document.querySelector('.profile__about');
-  const newName = document.querySelector('#form__input-name');
-  const newAbout = document.querySelector('#form__input-about');
+Array.from(document.querySelectorAll('.form')).forEach((popup) => {
+  let popupElement;
 
-  if (newName.value.length > 0 && newAbout.value.length > 0) {
-    oldName.textContent = newName.value;
-    oldAbout.textContent = newAbout.value;
-    newName.value = '';
-    newAbout.value = '';
-    popupElement.close()
+  if (popup.id === 'form-edit') {
+    popupElement = new PopupWithForm(popup, (data) => {
+      const userInfo = new UserInfo(data)
+      userInfo.setUserInfo()
+    })
+    popupElement.setEventListeners();
   }
-}
+
+  else {
+    popupElement = new PopupWithForm(popup, addNewCard)
+    popupElement.setEventListeners();
+  }
+
+  popupElement.getTriggerElement().addEventListener('click', () => {
+    popupElement.open()
+  })
+})
 
 cardsGallery.forEach( function (item) {
   const cardData = {

@@ -1,7 +1,5 @@
 import { opacity } from '../utils/constants.js'
-import { addNewCard, changeUserInfo } from '../scripts/index.js';
-
-export class Popup {
+export default class Popup {
   constructor(popupElement) {
     this._popupElement = popupElement;
     this._popupOpen = false
@@ -44,6 +42,7 @@ export class Popup {
     });
 
     document.addEventListener('click', (event) => {
+
       if (this._popupOpen === true) {
         this._clickOutsidePopup(event);
       }
@@ -54,24 +53,3 @@ export class Popup {
     });
   }
 }
-
-Array.from(document.querySelectorAll('.form')).forEach((popup) => {
-  const popupElement = new Popup(popup)
-  popupElement.setEventListeners();
-
-  const formButton = popup.querySelector('.form__button')
-  if (popup.id === 'form-edit') {
-    formButton.addEventListener('click', () => {
-      changeUserInfo(popupElement);
-    })
-  }
-  else {
-    formButton.addEventListener('click', () => {
-      addNewCard(popupElement);
-    })
-  }
-
-  popupElement.getTriggerElement().addEventListener('click', () => {
-    popupElement.open()
-  })
-})

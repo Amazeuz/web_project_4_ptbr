@@ -1,4 +1,4 @@
-import { Popup } from '../components/Popup.js'
+import Popup from '../components/Popup.js'
 import { opacity } from '../utils/constants.js';
 
 export class PopupWithImage extends Popup{
