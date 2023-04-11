@@ -4,8 +4,6 @@ export default class Card {
   constructor(data, template) {
     this._name = data.name;
     this._link = data.link;
-    this._imageModal = data.imageModal;
-    this._pageOpacity = data.pageOpacity;
     this._template = template;
   }
 

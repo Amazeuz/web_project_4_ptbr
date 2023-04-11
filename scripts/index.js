@@ -1,49 +1,55 @@
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import Card from '../components/Card.js';
-import { gallery, imageBlock, opacity } from '../utils/constants.js'
+import { gallery, imageBlock } from '../utils/constants.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js';
 
 const cardsGallery = [
   {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
   },
   {
     name: "Parque Nacional da Vanoise ",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
   },
   {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
-  }
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
+  },
+  {
+    name: "Montanhas Carecas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
+  },
+  {
+    name: "Vale de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+  },
 ];
 
 function addNewCard({firstField, secondField}) {
-  const cardData = {
+  const cardData = [{
     name: firstField,
     link: secondField,
-    imageModal: imageBlock,
-    pageOpacity: opacity
-  }
-  const card = new Card(cardData, '.default-template')
-  const cardElement = card.generateCard();
-  const newImage = new PopupWithImage(imageBlock, cardElement)
-  newImage.setEventListeners()
+  }];
 
-  gallery.prepend(cardElement);
+  const newCard = new Section({
+    items: cardData,
+    renderer: (item) => {
+      const card = new Card(item, ".default-template");
+      const cardElement = card.generateCard();
+      const newImage = new PopupWithImage(imageBlock, cardElement)
+      newImage.setEventListeners()
+      newCard.addItem(cardElement);
+    }
+  }, gallery);
+
+  newCard.renderItems()
 }
 
 Array.from(document.querySelectorAll('.form')).forEach((popup) => {
@@ -67,23 +73,15 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
   })
 })
 
-cardsGallery.forEach( function (item) {
-  const cardData = {
-    name: item.name,
-    link: item.link,
-    imageModal: imageBlock,
-    pageOpacity: opacity
+const cardList = new Section({
+  items: cardsGallery,
+  renderer: (item) => {
+    const card = new Card(item, ".default-template");
+    const cardElement = card.generateCard();
+    const newImage = new PopupWithImage(imageBlock, cardElement)
+    newImage.setEventListeners()
+    cardList.addItem(cardElement);
   }
+}, gallery);
 
-  const card = new Card(cardData,'.default-template');
-  const cardElement = card.generateCard();
-  gallery.append(cardElement)
-
-});
-
-const cardsAdded = Array.from(gallery.querySelectorAll('.item'))
-cardsAdded.forEach( (cardElement) => {
-
-  const newImage = new PopupWithImage(imageBlock, cardElement)
-  newImage.setEventListeners()
-});
+cardList.renderItems()
