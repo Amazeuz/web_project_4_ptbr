@@ -2,12 +2,14 @@ import Popup from '../components/Popup.js'
 import { opacity } from '../utils/constants.js';
 
 export class PopupWithImage extends Popup{
+  static numInstances = 0;
   constructor(popupElement, cardProperties) {
     super(popupElement);
     this._popupElement = popupElement;
     this._cardProperties = cardProperties;
     this._pageOpacity = opacity;
     this._popupOpen = false;
+    PopupWithImage.numInstances++;
   }
 
   open() {
