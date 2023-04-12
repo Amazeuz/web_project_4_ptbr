@@ -1,10 +1,11 @@
 //import { PopupWithImage } from './PopupWithImage.js'
 
 export default class Card {
-  constructor(data, template) {
+  constructor(data, template, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._template = template;
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate () {
@@ -21,7 +22,7 @@ export default class Card {
     this._element.closest('.item').remove();
   }
 
-  _handleCardClick(event) {
+  _cardClick(event) {
     const target = event.target;
     if (target.classList.contains('item__trash-icon')) {
       this._deleteCard();
@@ -29,11 +30,14 @@ export default class Card {
     else if (target.classList.contains('item__like')) {
       this._toggleLike();
     }
+    else if (target.classList.contains('item__image')) {
+      this._handleCardClick(this._name, this._link)
+    }
   }
 
   _setEventListeners() {
     this._element.addEventListener('click', (event) => {
-      this._handleCardClick(event);
+      this._cardClick(event);
     });
   }
 

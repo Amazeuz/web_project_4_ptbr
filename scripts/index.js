@@ -32,6 +32,13 @@ const cardsGallery = [
   },
 ];
 
+const popupImage = new PopupWithImage(imageBlock)
+popupImage.setEventListeners();
+
+function handleCardClick(name, link) {
+  popupImage.open(name, link)
+}
+
 function addNewCard({firstField, secondField}) {
   const cardData = [{
     name: firstField,
@@ -41,7 +48,7 @@ function addNewCard({firstField, secondField}) {
   const newCard = new Section({
     items: cardData,
     renderer: (item) => {
-      const card = new Card(item, ".default-template");
+      const card = new Card(item, ".default-template", handleCardClick);
       const cardElement = card.generateCard();
       const newImage = new PopupWithImage(imageBlock, cardElement)
       newImage.setEventListeners()
@@ -76,12 +83,10 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
 const cardList = new Section({
   items: cardsGallery,
   renderer: (item) => {
-    const card = new Card(item, ".default-template");
+    const card = new Card(item, ".default-template", handleCardClick);
     const cardElement = card.generateCard();
-    const newImage = new PopupWithImage(imageBlock, cardElement)
-    newImage.setEventListeners()
     cardList.addItem(cardElement);
   }
 }, gallery);
 
-cardList.renderItems()
+cardList.renderItems();

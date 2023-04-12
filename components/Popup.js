@@ -3,11 +3,6 @@ export default class Popup {
   constructor(popupElement) {
     this._popupElement = popupElement;
     this._popupOpen = false
-    this._trigger = this._popupElement.id
-  }
-
-  getTriggerElement() {
-    return document.querySelector(`#${this._trigger}-trigger`)
   }
 
   open() {
