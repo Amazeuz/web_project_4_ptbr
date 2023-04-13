@@ -1,24 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Webpack</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Around the U.S</title>
 </head>
 <body class="page">
-  <h1 class="page__title">Olá, aqui é o Webpack!</h1>
-  <h2 class="page__subtitle">Processamento de Arquivos de Imagens e Fontes!</h2>
-  <!-- adicione uma imagem aqui -->
-  <div class="page__image_wrapper">
-    <img id="image-steps" class="page__image" src="./images/steps.png">
+  <div id="opacity-block">
+    <header class="header">
+      <img id="vector-icon" class="header__title" alt="Logotipo Around The U.S.">
+      <img id="line-icon" alt="Linha escura horizontal percorrendo o cabeçalho">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__photo" alt="Foto de perfil">
+        <div class="profile-info">
+          <div>
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <img class="profile__edit" id="form-edit-trigger" alt="Botão de edição dos campos Nome e Sobre">
+          </div>
+          <h2 class="profile__about">Explorar</h2>
+        </div>
+        <img class="profile__add" id="form-image-trigger" alt="Botão de adicionar imagens á galeria">
+      </section>
+      <section class="gallery">
+      </section>
+    </main>
+    <footer class="footer">
+      <h1>&#169; 2023 Around The U.S.</h1>
+    </footer>
   </div>
-  <!-- adicione um bloco div -->
-  <div class="page__image_wrapper">
-    <div class="page__image page__image_achievements"></div>
-  </div>
-  <!-- adicione outra imagem aqui -->
-  <div class="page__image_wrapper">
-    <img class="page__image" src="./images/website-contacts.jpg">
-  </div>
+  <section class="form popup_hidden" id="form-edit">
+    <img class="form__exit" id="popup__exit" alt="Botão de fechar o pop-up">
+    <form name="info" class="form__items" novalidate>
+      <h1 class="form__title">Editar Perfil</h1>
+      <fieldset class="form__input-container">
+        <label class="form__field">
+          <input type='text' class="form__input" id="form__input-name" placeholder="Nome" minlength="2" maxlength="40" required>
+          <span class="form__input-error"></span>
+        </label>
+        <label class="form__field">
+          <input type='text' class="form__input" id="form__input-about" placeholder="Sobre mim" minlength="2" maxlength="200" required>
+          <span class="form__input-error"></span>
+        </label>
+        <button type="submit" class="form__button">Salvar</button>
+      </fieldset>
+    </form>
+  </section>
+  <section class="form popup_hidden" id='form-image'>
+    <img class="form__exit" id="popup__exit" alt="Botão de fechar o pop-up">
+    <form name="place" class="form__items" novalidate>
+      <h1 class="form__title">Novo local</h1>
+      <fieldset class="form__input-container">
+        <label class="form__field">
+          <input class="form__input" id="form-image__input-title" type="text" placeholder="Título" minlength="2" maxlength="30" required>
+          <span class="form__input-error"></span>
+        </label>
+        <label class="form__field">
+          <input class="form__input" id="form-image__input-url" type="url" placeholder="URL da imagem" required>
+          <span class="form__input-error"></span>
+        </label>
+        <button type="submit" class="form__button">Criar</button>
+      </fieldset>
+    </form>
+  </section>
+  <section class="image-click popup_hidden">
+    <div class="image-click__block">
+      <img class="image-click__exit" id="popup__exit" alt="Botão de fechar o pop-up">
+      <img class='image-click-open' alt="Imagem adicionada pelo usuário">
+      <p class="image-click__name"></p>
+    </div>
+  </section>
+  <template class="default-template">
+    <div class="item">
+      <img class="item__image" src="#" alt="Imagem adicionada pelo usuário">
+      <img class="item__trash-icon" id="trash-icon" alt="Ícone de lixo, para excluir a foto desejada">
+      <div>
+        <h1 class="item__title"></h1>
+        <img class="item__like" alt="Um coração com a função de curtir a imagem">
+      </div>
+    </div>
+  </template>
 </body>
 </html>
-<!-- estamos envolvendo cada elemento em um div para que apareçam na próxima linha -->

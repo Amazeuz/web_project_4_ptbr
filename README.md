@@ -12,6 +12,6 @@ A página é altamente responsiva, com diferentes layouts para diferentes tipos 
 
 -Resoluções superiores;
 
-Nesse projeto foram utilizados as técnologias mais básicas para desenvolvimento web, HTML, CSS e Javascript, além de git e metodologia BEM.
+Nesse projeto foram utilizados algumas tecnologias desenvolvimento web, como HTML, CSS e Javascript, além de git e metodologia BEM, e webpack.
 
 Link do site para github pages: https://amazeuz.github.io/web_project_4_ptbr/

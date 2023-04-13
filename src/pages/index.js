@@ -1,36 +1,11 @@
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import Card from '../components/Card.js';
-import { gallery, imageBlock } from '../utils/constants.js'
+import { gallery, imageBlock, cardsGallery } from '../utils/constants.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
-
-const cardsGallery = [
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
-  },
-  {
-    name: "Parque Nacional da Vanoise ",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
-  },
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-  },
-];
+import FormValidator from '../components/FormValidator.js'
+import {} from '../scripts/imports.js'
 
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
