@@ -1,13 +1,14 @@
 import '../pages/index.css'
 import exitIconSrc from '../images/vector__add.svg'
 import trashIconSrc from '../images/trash-icon.svg'
-import openPopupSrc from '../images/vector__edit.svg'
+import openEditPopupSrc from '../images/vector__edit.svg'
+import openAddPopupSrc from '../images/vector__add.svg'
 import likeIconSrc from '../images/vector__like-button.svg'
 import photoIconSrc from '../images/photo_image.png'
 import lineIconSrc from '../images/logo/Line.svg'
 import vectorIconSrc from '../images/logo/Vector.svg'
 
-const exitIconImages = document.querySelectorAll('#popup__exit')
+const exitIconImages = document.querySelectorAll('#popup-exit')
 
 Array.from(exitIconImages).forEach((item) => {
   item.src = exitIconSrc
@@ -28,7 +29,8 @@ vectorIconImage.src = vectorIconSrc;
 const photoIconImage = document.querySelector('.profile__photo')
 photoIconImage.src = photoIconSrc;
 
-const openPopusButtons = [document.querySelector('.profile__edit'), document.querySelector('.profile__add')]
-openPopusButtons.forEach((item) => {
-  item.src = openPopupSrc
-})
+const openEditPopupImage = document.querySelector('.profile__edit')
+openEditPopupImage.src = openEditPopupSrc;
+
+const openAddPopupImage = document.querySelector('.profile__add')
+openAddPopupImage.src = openAddPopupSrc;
