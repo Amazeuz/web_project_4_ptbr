@@ -32,7 +32,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupElement.querySelector('#unívoco').addEventListener("click", () => {
+    this._popupElement.querySelector('.form__exit').addEventListener("click", () => {
       this.close()
     });
 
