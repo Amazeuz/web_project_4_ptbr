@@ -32,7 +32,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupElement.querySelector('#popupExit').addEventListener("click", () => {
+    this._popupElement.querySelector('#unívoco').addEventListener("click", () => {
       this.close()
     });
 
