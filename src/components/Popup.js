@@ -26,8 +26,15 @@ export default class Popup {
   }
 
   _clickOutsidePopup (event) {
-    if (event.target.closest('.form') === null) {
-      this.close()
+    if (this._popupElement.classList.contains('image-click')) {
+      if (event.target === document.querySelector('.image-click')) {
+        this.close()
+      }
+    }
+    else {
+      if (event.target.closest('.form') === null) {
+        this.close()
+      }
     }
   }
 
