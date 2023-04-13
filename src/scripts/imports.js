@@ -8,7 +8,7 @@ import photoIconSrc from '../images/photo_image.png'
 import lineIconSrc from '../images/logo/Line.svg'
 import vectorIconSrc from '../images/logo/Vector.svg'
 
-const exitIconImages = document.querySelectorAll('#popup-exit')
+const exitIconImages = document.querySelectorAll('#form-exit')
 
 Array.from(exitIconImages).forEach((item) => {
   item.src = exitIconSrc

@@ -32,7 +32,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupElement.querySelector('#popup-exit').addEventListener("click", () => {
+    this._popupElement.querySelector('#form-exit').addEventListener("click", () => {
       this.close()
     });
 
