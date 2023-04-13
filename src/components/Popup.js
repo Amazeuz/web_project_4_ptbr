@@ -32,7 +32,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupElement.querySelector('.form__exit').addEventListener("click", () => {
+    this._popupElement.querySelector('img[alt="Botão de fechar o pop-up"]').addEventListener("click", () => {
       this.close()
     });
 
