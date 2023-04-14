@@ -50,6 +50,7 @@ export default class FormValidator {
   enableValidation () {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this._formElement.querySelector(this._button).classList.add(this._inactiveButton)
     });
 
     const fieldsets = this._formElement.querySelectorAll('.form__input-container')
