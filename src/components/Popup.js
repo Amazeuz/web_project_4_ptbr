@@ -5,6 +5,10 @@ export default class Popup {
     this._popupOpen = false
   }
 
+  getTriggerElement() {
+    return document.querySelector(`#${this._popupElement.id}-trigger`)
+  }
+
   open() {
     this._popupElement.classList.add('opacity-style');
     this._popupElement.classList.remove('popup_hidden');

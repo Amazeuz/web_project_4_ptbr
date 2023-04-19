@@ -7,10 +7,6 @@ export default class PopupWithForm extends Popup {
     this._callback = callback;
   }
 
-  getTriggerElement() {
-    return document.querySelector(`#${this._popupElement.id}-trigger`)
-  }
-
   _getInputValue() {
     const formInputs = this._popupElement.querySelectorAll('.form__input');
 

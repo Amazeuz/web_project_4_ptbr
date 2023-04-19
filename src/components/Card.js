@@ -8,7 +8,6 @@ export default class Card {
 
   _getTemplate () {
     const cardTemplate = document.querySelector(this._template).content.querySelector('.item').cloneNode(true);
-
     return cardTemplate;
   }
 
@@ -16,16 +15,9 @@ export default class Card {
     this._element.querySelector('.item__like').classList.toggle('item__like_type_liked');
   }
 
-  _deleteCard() {
-    this._element.closest('.item').remove();
-  }
-
   _cardClick(event) {
     const target = event.target;
-    if (target.classList.contains('item__trash-icon')) {
-      this._deleteCard();
-    }
-    else if (target.classList.contains('item__like')) {
+    if (target.classList.contains('item__like')) {
       this._toggleLike();
     }
     else if (target.classList.contains('item__image')) {

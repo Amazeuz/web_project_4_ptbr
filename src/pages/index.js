@@ -1,7 +1,8 @@
-import { PopupWithImage } from '../components/PopupWithImage.js';
 import Card from '../components/Card.js';
 import { gallery, imageBlock, cardsGallery } from '../utils/constants.js'
 import PopupWithForm from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js'
@@ -9,6 +10,9 @@ import {} from '../scripts/imports.js'
 
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
+
+const popupConfirmation = new PopupWithConfirmation(document.querySelector('#form-confirmation'));
+popupConfirmation.setEventListeners()
 
 function handleCardClick(name, link) {
   popupImage.open(name, link)
@@ -28,32 +32,17 @@ function addNewCard({firstField, secondField}) {
       const newImage = new PopupWithImage(imageBlock, cardElement)
       newImage.setEventListeners()
       newCard.addItem(cardElement);
+
+      const trashIcon = cardElement.querySelector('.item__trash-icon')
+      trashIcon.addEventListener('click', () => {
+        popupConfirmation.open()
+        popupConfirmation.deleteCard(trashIcon)
+      })
     }
   }, gallery);
 
   newCard.renderItems()
 }
-
-Array.from(document.querySelectorAll('.form')).forEach((popup) => {
-  let popupElement;
-
-  if (popup.id === 'form-edit') {
-    popupElement = new PopupWithForm(popup, (data) => {
-      const userInfo = new UserInfo(data)
-      userInfo.setUserInfo()
-    })
-    popupElement.setEventListeners();
-  }
-
-  else {
-    popupElement = new PopupWithForm(popup, addNewCard)
-    popupElement.setEventListeners();
-  }
-
-  popupElement.getTriggerElement().addEventListener('click', () => {
-    popupElement.open()
-  })
-})
 
 const cardList = new Section({
   items: cardsGallery,
@@ -65,3 +54,38 @@ const cardList = new Section({
 }, gallery);
 
 cardList.renderItems();
+
+Array.from(document.querySelectorAll('.form')).forEach((popup) => {
+  let popupElement;
+
+  if (popup.id === 'form-edit') {
+    popupElement = new PopupWithForm(popup, (data) => {
+      const userInfo = new UserInfo(data)
+      userInfo.setUserInfo()
+    })
+    popupElement.setEventListeners();
+    popupElement.getTriggerElement().addEventListener('click', () => {
+      popupElement.open()
+    })
+  }
+
+  if (popup.id ==='form-image') {
+    popupElement = new PopupWithForm(popup, addNewCard)
+    popupElement.setEventListeners();
+    popupElement.getTriggerElement().addEventListener('click', () => {
+      popupElement.open()
+    })
+  }
+  if (popup.id ==='form-confirmation') {
+    popupElement = new PopupWithConfirmation(popup);
+    popupElement.setEventListeners();
+
+    const trashIcons = Array.from(document.querySelectorAll('.item__trash-icon'))
+    trashIcons.forEach((trashIcon) => {
+      trashIcon.addEventListener('click', () => {
+        popupConfirmation.open()
+        popupConfirmation.deleteCard(trashIcon)
+      })
+    })
+  }
+})
