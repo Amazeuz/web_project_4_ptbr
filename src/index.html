@@ -15,10 +15,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__photo" alt="Foto de perfil">
+        <img class="profile__photo" alt="Foto de perfil" id="form-picture-trigger">
         <div class="profile-info">
           <div>
-            <h1 class="profile__name">Jacques Cousteau</h1>
+            <h1 class="profile__name"></h1>
             <img class="profile__edit" id="form-edit-trigger" alt="Botão de edição dos campos Nome e Sobre">
           </div>
           <h2 class="profile__about">Explorar</h2>
@@ -78,6 +78,19 @@
     <div class="form__items">
       <h1 class="form__title">Tem certeza ?</h1>
       <button type="submit" class="form__button">Sim</button>
+    </div>
+  </section>
+  <section class="form popup popup_hidden" id="form-picture">
+    <img class="form__exit" alt="Botão de fechar o pop-up">
+    <div class="form__items">
+      <h1 class="form__title">Alterar foto de perfil</h1>
+      <fieldset class="form__input-container">
+        <label class="form__field">
+          <input class="form__input" id="form-image__input-title" type="url" placeholder="URL da imagem" required>
+          <span class="form__input-error"></span>
+        </label>
+      </fieldset>
+      <button type="submit" class="form__button">Salvar</button>
     </div>
   </section>
   <template class="default-template">
