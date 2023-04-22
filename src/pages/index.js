@@ -5,18 +5,11 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
-import Api from '../components/Api.js';
-import photoIconSrc from '../images/photo_image.png'
+import { api } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js'
 import {} from '../scripts/imports.js'
 
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_cohort_03",
-  headers: {
-    authorization: "49a188cf-9e1d-457c-becd-1d6b283140a7",
-    "Content-Type": "application/json"
-  }
-});
+
 
 const profilePhoto = document.querySelector('.profile__photo')
 const profileName = document.querySelector('.profile__name')
@@ -31,6 +24,7 @@ function renderData(data) {
 api.loadUserInfo().then(obj => {
   renderData(obj)
 })
+
 
 
 const popupImage = new PopupWithImage(imageBlock)

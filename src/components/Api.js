@@ -22,9 +22,10 @@ export default class Api {
   }
 
   getInitialCards() {
-    fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: this._authorization
+        authorization: this._authorization,
+        "Content-Type": "application/json"
       }
     })
     .then((res) => {
@@ -33,9 +34,6 @@ export default class Api {
       }
 
         return Promise.reject(`Algo deu errado: ${res.status}`);
-    })
-    .then((data) => {
-        console.log(data)
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -76,7 +74,7 @@ export default class Api {
         return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .then((data) => {
-        JSON.parse(console.log(data));
+        console.log(data)
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
