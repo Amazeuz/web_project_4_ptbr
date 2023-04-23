@@ -1,5 +1,5 @@
 import Card from '../components/Card.js';
-import { gallery, imageBlock, cardsGallery } from '../utils/constants.js'
+import { gallery, imageBlock, cardsGallery, profilePhoto, profileName, profileAbout } from '../utils/constants.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
@@ -8,24 +8,6 @@ import Section from '../components/Section.js';
 import { api } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js'
 import {} from '../scripts/imports.js'
-
-
-
-const profilePhoto = document.querySelector('.profile__photo')
-const profileName = document.querySelector('.profile__name')
-const profileAbout = document.querySelector('.profile__about')
-
-function renderData(data) {
-  profilePhoto.src = data.avatar
-  profileName.textContent = data.name
-  profileAbout.textContent = data.about
-}
-
-api.loadUserInfo().then(obj => {
-  renderData(obj)
-})
-
-
 
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
@@ -37,11 +19,32 @@ function handleCardClick(name, link) {
   popupImage.open(name, link)
 }
 
-function addNewCard({firstField, secondField}) {
+function renderData(data) {
+  profilePhoto.src = data.avatar
+  profileName.textContent = data.name
+  profileAbout.textContent = data.about
+}
+
+function renderProfilePhoto(avatar) {
+  profilePhoto.src = avatar
+}
+
+api.loadUserInfo().then(obj => {
+  renderData(obj)
+})
+
+//api.deleteCard("64458ae004aea70012b8efa9")
+
+//api.deleteCard("644594c52e0f48002749aafb")
+
+function addNewCard({firstInput, secondInput}) {
   const cardData = [{
-    name: firstField,
-    link: secondField,
+    name: firstInput,
+    link: secondInput,
   }];
+  api.addNewCard(firstInput, secondInput).then(obj => {
+    return obj
+  })
 
   const newCard = new Section({
     items: cardData,
@@ -78,7 +81,10 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
   let popupElement;
 
   if (popup.id === 'form-edit') {
-    popupElement = new PopupWithForm(popup, (data) => {
+    popupElement = new PopupWithForm(popup, (inputs) => {
+      const data = api.editUserInfo(inputs.firstField, inputs.secondField).then(obj => {
+        renderData(obj)
+      })
       const userInfo = new UserInfo(data)
       userInfo.setUserInfo()
     })
@@ -105,14 +111,21 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
       trashIcon.addEventListener('click', () => {
         popupConfirmation.open()
         popupConfirmation.deleteCard(trashIcon)
+
+        //api.deleteCard()
       })
     })
   }
-  /*if (popup.id === 'form-picture') {
-    popupElement = new PopupWithForm(popup, api.changeProfilePicture)
+  if (popup.id === 'form-picture') {
+    popupElement = new PopupWithForm(popup, () => {
+      const avatar = popup.querySelector('.form__input')
+
+      api.changeProfilePicture(avatar.value)
+      renderProfilePhoto(avatar.value)
+    })
     popupElement.setEventListeners();
     popupElement.getTriggerElement().addEventListener('click', () => {
       popupElement.open()
     })
-  }*/
+  }
 })

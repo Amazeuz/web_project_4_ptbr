@@ -10,26 +10,39 @@ export default class PopupWithForm extends Popup {
   _getInputValue() {
     const formInputs = this._popupElement.querySelectorAll('.form__input');
 
-    const inputsSelector = {
-      firstInput: Array.from(formInputs)[0],
-      secondInput: Array.from(formInputs)[1]
+    if (formInputs.length === 2) {
+      const inputsSelector = {
+        firstInput: Array.from(formInputs)[0],
+        secondInput: Array.from(formInputs)[1]
+      }
+      return inputsSelector
     }
-    return inputsSelector
+    else if (formInputs.length === 1) {
+      return Array.from(formInputs)
+    }
   }
 
   close() {
     super.close()
-    this._getInputValue().firstInput.value = ''
-    this._getInputValue().secondInput.value = ''
+
+    console.log(this._getInputValue())
+    for (const input in this._getInputValue()) {
+      this._getInputValue()[input].value = ""
+    }
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._popupElement.querySelector('.form__button').addEventListener('click', () => {
       const inputsValue = {
-        firstField: this._getInputValue().firstInput.value,
-        secondField: this._getInputValue().secondInput.value
+
       }
+
+      for (const input in this._getInputValue()) {
+        inputsValue[input] = this._getInputValue()[input].value
+      }
+      console.log(inputsValue)
+
       this._callback(inputsValue)
       this.close()
     })
