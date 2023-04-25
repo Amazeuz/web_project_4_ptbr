@@ -1,5 +1,5 @@
 import Card from '../components/Card.js';
-import { gallery, imageBlock, cardsGallery, profilePhoto, profileName, profileAbout } from '../utils/constants.js'
+import { gallery, imageBlock, cardsGallery, profilePhoto, profileName, profileAbout, confirmationForm } from '../utils/constants.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
@@ -12,7 +12,15 @@ import {} from '../scripts/imports.js'
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
 
-const popupConfirmation = new PopupWithConfirmation(document.querySelector('#form-confirmation'));
+/*api.getServerCards().then(obj => {
+  obj.forEach(item => {
+    if (item.name.toLowerCase().includes('neve')) {
+      api.deleteCard(item._id)
+    }
+  })
+})*/
+
+const popupConfirmation = new PopupWithConfirmation(confirmationForm);
 popupConfirmation.setEventListeners()
 
 function handleCardClick(name, link) {
@@ -33,10 +41,6 @@ api.loadUserInfo().then(obj => {
   renderData(obj)
 })
 
-//api.deleteCard("64458ae004aea70012b8efa9")
-
-//api.deleteCard("644594c52e0f48002749aafb")
-
 function addNewCard({firstInput, secondInput}) {
   const cardData = [{
     name: firstInput,
@@ -51,19 +55,31 @@ function addNewCard({firstInput, secondInput}) {
     renderer: (item) => {
       const card = new Card(item, ".default-template", handleCardClick);
       const cardElement = card.generateCard();
-      const newImage = new PopupWithImage(imageBlock, cardElement)
-      newImage.setEventListeners()
+      const newImage = new PopupWithImage(imageBlock, cardElement);
+      newImage.setEventListeners();
       newCard.addItem(cardElement);
 
-      const trashIcon = cardElement.querySelector('.item__trash-icon')
+      const trashIcon = cardElement.querySelector('.item__trash-icon');
       trashIcon.addEventListener('click', () => {
-        popupConfirmation.open()
-        popupConfirmation.deleteCard(trashIcon)
-      })
+        popupConfirmation.open();
+
+        const deleteServerCard = async () => {
+          const userData = await api.loadUserInfo();
+          const serverCards = await api.getServerCards();
+          serverCards.forEach((card => {
+            if (card.owner._id === userData._id) {
+              if (card.name === cardElement.querySelector('.item__title').textContent) {
+                api.deleteCard(card._id);
+              }
+            }
+          }));
+        }
+        popupConfirmation.deleteCard(trashIcon, deleteServerCard);
+      });
     }
   }, gallery);
 
-  newCard.renderItems()
+  newCard.renderItems();
 }
 
 const cardList = new Section({
@@ -112,7 +128,7 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
         popupConfirmation.open()
         popupConfirmation.deleteCard(trashIcon)
 
-        //api.deleteCard()
+        api.deleteCard()
       })
     })
   }

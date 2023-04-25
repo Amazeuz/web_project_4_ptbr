@@ -6,8 +6,9 @@ export default class PopupWithConfirmation extends Popup {
     this._popupElement = popupElement
   }
 
-  deleteCard(trashIconElement) {
-    this._popupElement.querySelector('.form__button').addEventListener('click', () => {
+  deleteCard(trashIconElement, deleteServerCard) {
+    this._popupElement.querySelector('.form__button').addEventListener('click', async () => {
+      deleteServerCard()
       trashIconElement.closest('.item').remove();
       this.close()
     })

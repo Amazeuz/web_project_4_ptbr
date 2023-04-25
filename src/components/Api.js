@@ -21,7 +21,7 @@ export default class Api {
     });
   }
 
-  getInitialCards() {
+  getServerCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: this._authorization,
@@ -31,7 +31,6 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-
         return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
@@ -61,8 +60,6 @@ export default class Api {
   }
 
   addNewCard(name, link) {
-    console.log(name)
-    console.log(link)
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: {
@@ -81,30 +78,34 @@ export default class Api {
 
         return Promise.reject(`Algo deu errado: ${res.status}`);
     })
-    .then(data => {
-      console.log(data)
-    })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
     });
   }
 
   getLikesNumber(cardID) {
+    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+      headers: {
+        authorization: this._authorization,
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
 
+        return Promise.reject(`Algo deu errado: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log("Erro. A solicitação falhou: ", err);
+    });
   }
 
   toggleLike() {
-    fetch(`${this._baseUrl}/cards/likes/cardId`, {
+    return fetch(`${this._baseUrl}/cards/likes/cardId`, {
       method: 'PUT'
     })
 
-    fetch(`${this._baseUrl}/cards/likes/cardId`, {
-      method: 'DELETE'
-    })
-  }
-  getCardData() {
-    return fetch(`https://around.nomoreparties.co/v1/groupId/cards`, {
-    })
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -114,11 +115,9 @@ export default class Api {
     })
     .then(data => {
       console.log(data)
-      data.forEach(item => {
-        console.log(item)
-      })
     })
-    .catch(err => {
+
+    .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
     })
   }
@@ -136,9 +135,6 @@ export default class Api {
       }
 
         return Promise.reject(`Algo deu errado: ${res.status}`);
-    })
-    .then(data => {
-      console.log(data)
     })
     .catch(err => {
       console.log("Erro. A solicitação falhou: ", err);

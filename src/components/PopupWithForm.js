@@ -25,7 +25,6 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close()
 
-    console.log(this._getInputValue())
     for (const input in this._getInputValue()) {
       this._getInputValue()[input].value = ""
     }
@@ -41,7 +40,6 @@ export default class PopupWithForm extends Popup {
       for (const input in this._getInputValue()) {
         inputsValue[input] = this._getInputValue()[input].value
       }
-      console.log(inputsValue)
 
       this._callback(inputsValue)
       this.close()
