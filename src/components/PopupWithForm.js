@@ -33,10 +33,7 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._popupElement.querySelector('.form__button').addEventListener('click', () => {
-      const inputsValue = {
-
-      }
-
+      const inputsValue = {}
       for (const input in this._getInputValue()) {
         inputsValue[input] = this._getInputValue()[input].value
       }

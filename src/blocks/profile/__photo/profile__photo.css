@@ -4,6 +4,12 @@
   border-radius: 100%;
   margin-right: 30px;
   object-fit: cover;
+  cursor: pointer;
+  transition: opacity .4s;
+}
+
+.profile__photo:hover {
+  opacity: .5;
 }
 
 @media screen and (min-width: 601px) and (max-width: 894px) {

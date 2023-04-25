@@ -14,7 +14,7 @@ popupImage.setEventListeners();
 
 api.getServerCards().then(obj => {
   obj.forEach(item => {
-    if (item.name.toLowerCase().includes('dddd')) {
+    if (item.name.toLowerCase().includes('ddddd')) {
       api.deleteCard(item._id)
     }
   })
@@ -27,33 +27,27 @@ function handleCardClick(name, link) {
   popupImage.open(name, link)
 }
 
-function renderData(data) {
+api.loadUserInfo().then(obj => {
+  return obj
+})
+.then(data => {
   profilePhoto.src = data.avatar
   profileName.textContent = data.name
   profileAbout.textContent = data.about
-}
-
-function renderProfilePhoto(avatar) {
-  profilePhoto.src = avatar
-}
-
-api.loadUserInfo().then(obj => {
-  renderData(obj)
 })
 
-async function enableCardDelete(cardElement) {
+function enableCardDelete(cardElement) {
   const trashIcon = cardElement.querySelector('.item__trash-icon');
-  const serverCards = await api.getServerCards()
 
   trashIcon.addEventListener('click', () => {
     popupConfirmation.open();
     popupConfirmation.deleteCard(trashIcon, () => {
-      serverCards.forEach((card => {
+      api.getServerCards().then(cards => {cards.forEach((card => {
         if (card.name === cardElement.querySelector('.item__title').textContent
         && card.link === cardElement.querySelector('.item__image').src) {
           api.deleteCard(card._id);
         }
-      }));
+      }))});
     });
   });
 }
@@ -85,20 +79,22 @@ function addNewCard({firstInput, secondInput}) {
 
 const cardList = new Section({
   items: cardsGallery,
-  renderer: async (item) => {
+  renderer: (item) => {
     const card = new Card(item, ".default-template", handleCardClick);
     const cardElement = card.generateCard();
-    const userData = await api.loadUserInfo()
 
-    if (item.owner._id !== userData._id) {
+    api.loadUserInfo().then(data => {
+      if (data._id !== item.owner._id) {
         cardElement.querySelector('.item__trash-icon').remove()
         cardElement.querySelector('.item__container').style.bottom = "0";
       }
-    else {
-      enableCardDelete(cardElement);
-    }
-    cardList.addItem(cardElement);
-  }
+
+      else {
+        enableCardDelete(cardElement);
+      }
+      cardList.addItem(cardElement);
+      }
+    )}
 }, gallery);
 
 cardList.renderItems();
@@ -132,25 +128,29 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
     popupElement = new PopupWithConfirmation(popup);
     popupElement.setEventListeners();
 
-    setTimeout(() => {
-      const trashIcons = Array.from(document.querySelectorAll('.item__trash-icon'))
-      trashIcons.forEach((trashIcon) => {
-        trashIcon.addEventListener('click', () => {
-          popupConfirmation.open()
-          popupConfirmation.deleteCard(trashIcon)
+    const trashIcons = Array.from(document.querySelectorAll('.item__trash-icon'))
+    trashIcons.forEach((trashIcon) => {
+      trashIcon.addEventListener('click', () => {
+        popupConfirmation.open()
+        popupConfirmation.deleteCard(trashIcon)
 
-          api.deleteCard()
-        })
+        api.deleteCard()
       })
-    }, 2000)
-  }
-  if (popup.id === 'form-picture') {
-    popupElement = new PopupWithForm(popup, () => {
-      const avatar = popup.querySelector('.form__input')
-
-      api.changeProfilePicture(avatar.value)
-      renderProfilePhoto(avatar.value)
     })
+  }
+
+  function renderLoading(isLoading, formElement) {
+    const formButtonText = formElement.querySelector('.form__button');
+
+    formButtonText.textContent = 'Salvar...'
+  }
+
+  if (popup.id === 'form-picture') {
+    popupElement = new PopupWithForm(popup, (inputValue) =>  {
+      api.changeProfilePicture(inputValue);
+      profilePhoto.src = inputValue[0];
+    })
+
     popupElement.setEventListeners();
     popupElement.getTriggerElement().addEventListener('click', () => {
       popupElement.open()
