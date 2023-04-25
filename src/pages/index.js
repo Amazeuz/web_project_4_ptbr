@@ -12,13 +12,13 @@ import {} from '../scripts/imports.js'
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
 
-/*api.getServerCards().then(obj => {
+api.getServerCards().then(obj => {
   obj.forEach(item => {
-    if (item.name.toLowerCase().includes('neve')) {
+    if (item.name.toLowerCase().includes('dddd')) {
       api.deleteCard(item._id)
     }
   })
-})*/
+})
 
 const popupConfirmation = new PopupWithConfirmation(confirmationForm);
 popupConfirmation.setEventListeners()
@@ -41,6 +41,23 @@ api.loadUserInfo().then(obj => {
   renderData(obj)
 })
 
+async function enableCardDelete(cardElement) {
+  const trashIcon = cardElement.querySelector('.item__trash-icon');
+  const serverCards = await api.getServerCards()
+
+  trashIcon.addEventListener('click', () => {
+    popupConfirmation.open();
+    popupConfirmation.deleteCard(trashIcon, () => {
+      serverCards.forEach((card => {
+        if (card.name === cardElement.querySelector('.item__title').textContent
+        && card.link === cardElement.querySelector('.item__image').src) {
+          api.deleteCard(card._id);
+        }
+      }));
+    });
+  });
+}
+
 function addNewCard({firstInput, secondInput}) {
   const cardData = [{
     name: firstInput,
@@ -57,25 +74,9 @@ function addNewCard({firstInput, secondInput}) {
       const cardElement = card.generateCard();
       const newImage = new PopupWithImage(imageBlock, cardElement);
       newImage.setEventListeners();
+
+      enableCardDelete(cardElement);
       newCard.addItem(cardElement);
-
-      const trashIcon = cardElement.querySelector('.item__trash-icon');
-      trashIcon.addEventListener('click', () => {
-        popupConfirmation.open();
-
-        const deleteServerCard = async () => {
-          const userData = await api.loadUserInfo();
-          const serverCards = await api.getServerCards();
-          serverCards.forEach((card => {
-            if (card.owner._id === userData._id) {
-              if (card.name === cardElement.querySelector('.item__title').textContent) {
-                api.deleteCard(card._id);
-              }
-            }
-          }));
-        }
-        popupConfirmation.deleteCard(trashIcon, deleteServerCard);
-      });
     }
   }, gallery);
 
@@ -84,9 +85,18 @@ function addNewCard({firstInput, secondInput}) {
 
 const cardList = new Section({
   items: cardsGallery,
-  renderer: (item) => {
+  renderer: async (item) => {
     const card = new Card(item, ".default-template", handleCardClick);
     const cardElement = card.generateCard();
+    const userData = await api.loadUserInfo()
+
+    if (item.owner._id !== userData._id) {
+        cardElement.querySelector('.item__trash-icon').remove()
+        cardElement.querySelector('.item__container').style.bottom = "0";
+      }
+    else {
+      enableCardDelete(cardElement);
+    }
     cardList.addItem(cardElement);
   }
 }, gallery);
@@ -122,15 +132,17 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
     popupElement = new PopupWithConfirmation(popup);
     popupElement.setEventListeners();
 
-    const trashIcons = Array.from(document.querySelectorAll('.item__trash-icon'))
-    trashIcons.forEach((trashIcon) => {
-      trashIcon.addEventListener('click', () => {
-        popupConfirmation.open()
-        popupConfirmation.deleteCard(trashIcon)
+    setTimeout(() => {
+      const trashIcons = Array.from(document.querySelectorAll('.item__trash-icon'))
+      trashIcons.forEach((trashIcon) => {
+        trashIcon.addEventListener('click', () => {
+          popupConfirmation.open()
+          popupConfirmation.deleteCard(trashIcon)
 
-        api.deleteCard()
+          api.deleteCard()
+        })
       })
-    })
+    }, 2000)
   }
   if (popup.id === 'form-picture') {
     popupElement = new PopupWithForm(popup, () => {

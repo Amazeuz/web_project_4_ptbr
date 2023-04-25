@@ -14,7 +14,6 @@ export default class Section {
       });
     }
     catch(error) {
-      console.log(error)
       this._renderedItems.forEach((item) => {
         this._renderer(item);
       });
