@@ -20,6 +20,12 @@ api.getServerCards().then(obj => {
   })
 })
 
+//api.getServerCards().then(obj => {
+//  obj.forEach(item => {
+//    console.log(item.likes.length)
+//  })
+//})
+
 const popupConfirmation = new PopupWithConfirmation(confirmationForm);
 popupConfirmation.setEventListeners()
 
@@ -78,6 +84,7 @@ const cardList = new Section({
   renderer: (item) => {
     const card = new Card(item, ".default-template", handleCardClick);
     const cardElement = card.generateCard();
+    cardElement.querySelector('.item__likes').textContent = item.likes.length;
 
     api.loadUserInfo().then(data => {
       if (data._id !== item.owner._id) {

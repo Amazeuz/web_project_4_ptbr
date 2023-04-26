@@ -89,26 +89,8 @@ export default class Api {
     })
   }
 
-  getLikesNumber(cardID) {
-    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-      headers: {
-        authorization: this._authorization,
-      }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log("Erro. A solicitação falhou: ", err);
-    });
-  }
-
-  toggleLike() {
-    return fetch(`${this._baseUrl}/cards/likes/cardId`, {
+  toggleLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'PUT'
     })
 
