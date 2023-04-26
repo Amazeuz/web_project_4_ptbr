@@ -24,9 +24,19 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close()
-
     for (const input in this._getInputValue()) {
       this._getInputValue()[input].value = ""
+    }
+  }
+
+  _loadingForm(isLoading) {
+    const formButton = this._popupElement.querySelector('.form__button')
+
+    if (isLoading) {
+      formButton.textContent = "Salvando..."
+    }
+    else {
+      formButton.textContent = "Salvar"
     }
   }
 
@@ -38,8 +48,12 @@ export default class PopupWithForm extends Popup {
         inputsValue[input] = this._getInputValue()[input].value
       }
 
+      console.log(inputsValue)
       this._callback(inputsValue)
+      //this._loadingForm(true)
+      //setTimeout(() => {this.close()
       this.close()
+      //this._loadingForm(false)
     })
   }
 }

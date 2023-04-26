@@ -1,6 +1,8 @@
 .item__like {
   cursor: pointer;
   transition: opacity .4s;
+  max-width: 21px;
+  align-self: center;
 }
 
 .item__like:hover {

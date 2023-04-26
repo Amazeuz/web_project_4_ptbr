@@ -6,3 +6,9 @@
   justify-content: space-between;
   margin: auto;
 }
+
+.item__container > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

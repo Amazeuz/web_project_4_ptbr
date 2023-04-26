@@ -1,7 +1,7 @@
 export default class UserInfo {
-  constructor({firstField, secondField}) {
-    this._name = firstField;
-    this._job = secondField;
+  constructor({firstInput, secondInput}) {
+    this._name = firstInput;
+    this._job = secondInput;
   }
 
   getUserInfo() {

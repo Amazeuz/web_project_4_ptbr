@@ -27,10 +27,7 @@ function handleCardClick(name, link) {
   popupImage.open(name, link)
 }
 
-api.loadUserInfo().then(obj => {
-  return obj
-})
-.then(data => {
+api.loadUserInfo().then(data => {
   profilePhoto.src = data.avatar
   profileName.textContent = data.name
   profileAbout.textContent = data.about
@@ -57,9 +54,6 @@ function addNewCard({firstInput, secondInput}) {
     name: firstInput,
     link: secondInput,
   }];
-  api.addNewCard(firstInput, secondInput).then(obj => {
-    return obj
-  })
 
   const newCard = new Section({
     items: cardData,
@@ -68,6 +62,8 @@ function addNewCard({firstInput, secondInput}) {
       const cardElement = card.generateCard();
       const newImage = new PopupWithImage(imageBlock, cardElement);
       newImage.setEventListeners();
+
+      api.addNewCard(firstInput, secondInput)
 
       enableCardDelete(cardElement);
       newCard.addItem(cardElement);
@@ -104,10 +100,9 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
 
   if (popup.id === 'form-edit') {
     popupElement = new PopupWithForm(popup, (inputs) => {
-      const data = api.editUserInfo(inputs.firstField, inputs.secondField).then(obj => {
-        renderData(obj)
-      })
-      const userInfo = new UserInfo(data)
+      api.editUserInfo(inputs)
+
+      const userInfo = new UserInfo(inputs)
       userInfo.setUserInfo()
     })
     popupElement.setEventListeners();
@@ -137,12 +132,6 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
         api.deleteCard()
       })
     })
-  }
-
-  function renderLoading(isLoading, formElement) {
-    const formButtonText = formElement.querySelector('.form__button');
-
-    formButtonText.textContent = 'Salvar...'
   }
 
   if (popup.id === 'form-picture') {

@@ -25,6 +25,7 @@
 @import url(../blocks/item/__image/item__image.css);
 @import url(../blocks/item/__like/item__like.css);
 @import url(../blocks/item/__container/item__container.css);
+@import url(../blocks/item/__container/__likes/item__likes.css);
 @import url(../blocks/item/__like/__like_type_liked/item__like_type_liked.css);
 @import url(../blocks/item/__title/item__title.css);
 
