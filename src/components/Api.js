@@ -62,7 +62,7 @@ export default class Api {
     })
   }
 
-  addNewCard(name, link) {
+  addServerCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: {
@@ -89,11 +89,13 @@ export default class Api {
     })
   }
 
-  toggleLike(cardId) {
+  addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: 'PUT'
+      method: 'PUT',
+      headers: {
+        authorization: this._authorization
+      }
     })
-
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -101,17 +103,32 @@ export default class Api {
 
         return Promise.reject(`Algo deu errado: ${res.status}`);
     })
-    .then(data => {
-      console.log(data)
-    })
-
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
     })
   }
 
-  deleteCard(cardID) {
-    return fetch(`${this._baseUrl}/cards/${cardID}`, {
+  removeLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+        return Promise.reject(`Algo deu errado: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log("Erro. A solicitação falhou: ", err);
+    })
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorization,

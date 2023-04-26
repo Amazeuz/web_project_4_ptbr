@@ -20,12 +20,6 @@ api.getServerCards().then(obj => {
   })
 })
 
-//api.getServerCards().then(obj => {
-//  obj.forEach(item => {
-//    console.log(item.likes.length)
-//  })
-//})
-
 const popupConfirmation = new PopupWithConfirmation(confirmationForm);
 popupConfirmation.setEventListeners()
 
@@ -66,10 +60,24 @@ function addNewCard({firstInput, secondInput}) {
     renderer: (item) => {
       const card = new Card(item, ".default-template", handleCardClick);
       const cardElement = card.generateCard();
+
+      api.addServerCard(firstInput, secondInput).then(obj => {
+        const cardLikeButton = cardElement.querySelector('.item__like')
+        cardLikeButton.addEventListener('click', () => {
+          const cardLikesNumber = cardElement.querySelector('.item__likes')
+          if (!cardLikeButton.classList.contains('item__like_type_liked')) {
+            api.addLike(obj._id)
+            cardLikesNumber.textContent = 1;
+          }
+          else {
+            api.removeLike(obj._id)
+            cardLikesNumber.textContent = 0;
+          }
+        })
+      })
+
       const newImage = new PopupWithImage(imageBlock, cardElement);
       newImage.setEventListeners();
-
-      api.addNewCard(firstInput, secondInput)
 
       enableCardDelete(cardElement);
       newCard.addItem(cardElement);
@@ -84,14 +92,44 @@ const cardList = new Section({
   renderer: (item) => {
     const card = new Card(item, ".default-template", handleCardClick);
     const cardElement = card.generateCard();
+
     cardElement.querySelector('.item__likes').textContent = item.likes.length;
+    api.loadUserInfo().then(user => {
+      const checkUserLike = (item) => item.likes.some(element => element._id === user._id)
+      const cardLikesNumber = cardElement.querySelector('.item__likes');
+
+      cardElement.querySelector('.item__like').addEventListener('click', () => {
+        const renderedCard = api.getServerCards()
+        renderedCard.then(obj => {
+          obj.forEach(ServerCard => {
+            if (ServerCard._id === item._id) {
+              if (!checkUserLike(ServerCard)) {
+                api.addLike(ServerCard._id)
+                cardLikesNumber.textContent = ServerCard.likes.length + 1
+              }
+              else {
+                api.removeLike(ServerCard._id)
+                cardLikesNumber.textContent = ServerCard.likes.length - 1
+              }
+            }
+          })
+        })
+      })
+
+      const cardLikeButton = cardElement.querySelector('.item__like')
+      if (checkUserLike(item)) {
+        cardLikeButton.classList.add('item__like_type_liked')
+      }
+      else {
+        cardLikeButton.classList.remove('item__like_type_liked')
+      }
+    })
 
     api.loadUserInfo().then(data => {
       if (data._id !== item.owner._id) {
         cardElement.querySelector('.item__trash-icon').remove()
         cardElement.querySelector('.item__container').style.bottom = "0";
       }
-
       else {
         enableCardDelete(cardElement);
       }
