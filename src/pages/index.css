@@ -16,10 +16,13 @@
 @import url(../blocks/page.css);
 
 @import url(../blocks/profile/__add/profile__add.css);
+
+@import url(../blocks/profile/__image-container/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__image-container/__photo/profile__photo.css);
+@import url(../blocks/profile/__image-container/profile__image-container.css);
 @import url(../blocks/profile-info/__edit/profile__edit.css);
 @import url(../blocks/profile-info/__about/profile__about.css);
 @import url(../blocks/profile-info/__name/profile__name.css);
-@import url(../blocks/profile/__photo/profile__photo.css);
 
 @import url(../blocks/item/__trash-icon/item__trash-icon.css);
 @import url(../blocks/item/__image/item__image.css);

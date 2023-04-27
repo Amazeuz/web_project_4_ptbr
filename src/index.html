@@ -15,7 +15,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__photo" alt="Foto de perfil" id="form-picture-trigger">
+        <div class="profile__image-container">
+          <img class="profile__photo" alt="Foto de perfil" id="form-picture-trigger">
+          <img class="profile__edit-button" alt="Ícone de Edição da imagem de perfil">
+        </div>
         <div class="profile-info">
           <div>
             <h1 class="profile__name"></h1>
@@ -82,16 +85,16 @@
   </section>
   <section class="form popup popup_hidden" id="form-picture">
     <img class="form__exit" alt="Botão de fechar o pop-up">
-    <div class="form__items">
+    <form name="picture" class="form__items" novalidate>
       <h1 class="form__title">Alterar foto de perfil</h1>
       <fieldset class="form__input-container">
         <label class="form__field">
-          <input class="form__input" id="form-image__input-title" type="url" placeholder="URL da imagem" required>
+          <input class="form__input" type="url" placeholder="URL da imagem" required>
           <span class="form__input-error"></span>
         </label>
+        <button type="submit" class="form__button">Salvar</button>
       </fieldset>
-      <button type="submit" class="form__button">Salvar</button>
-    </div>
+    </form>
   </section>
   <template class="default-template">
     <div class="item">

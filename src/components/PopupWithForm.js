@@ -1,5 +1,4 @@
 import Popup from './Popup.js';
-
 export default class PopupWithForm extends Popup {
   constructor(popupElement, callback) {
     super(popupElement)
@@ -29,17 +28,6 @@ export default class PopupWithForm extends Popup {
     }
   }
 
-  _loadingForm(isLoading) {
-    const formButton = this._popupElement.querySelector('.form__button')
-
-    if (isLoading) {
-      formButton.textContent = "Salvando..."
-    }
-    else {
-      formButton.textContent = "Salvar"
-    }
-  }
-
   setEventListeners() {
     super.setEventListeners();
     this._popupElement.querySelector('.form__button').addEventListener('click', () => {
@@ -48,12 +36,7 @@ export default class PopupWithForm extends Popup {
         inputsValue[input] = this._getInputValue()[input].value
       }
 
-      console.log(inputsValue)
       this._callback(inputsValue)
-      //this._loadingForm(true)
-      //setTimeout(() => {this.close()
-      this.close()
-      //this._loadingForm(false)
     })
   }
 }

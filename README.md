@@ -1,6 +1,6 @@
 Around the U.S
 
-Around the U.S é uma página de perfil que tem como características a exibição e edição de nome, informações, com uma galeria de imagens, além de uma série de funcionalidades como validação de formulário, adicionar sua própria imagem, exclui-la e expandi-la.
+Around the U.S é uma rede social em que os usuários podem enviar imagens para o servidor, com cada um contendo seu próprio perfíl, onde podem editar seus nomes, trabalho e foto de perfil. Around the U.S possui outras funcionalidades como validação de formulário, expansão e exclusão de imagem, alteração de foto de perfíl, e outros...
 
 A página é altamente responsiva, com diferentes layouts para diferentes tipos de dispositivos:
 
@@ -12,6 +12,6 @@ A página é altamente responsiva, com diferentes layouts para diferentes tipos 
 
 -Resoluções superiores;
 
-Nesse projeto foram utilizados algumas tecnologias desenvolvimento web, como HTML, CSS e Javascript, além de git e metodologia BEM, e webpack.
+Nesse projeto foram utilizados algumas tecnologias desenvolvimento web, como HTML, CSS e Javascript de git e metodologia BEM, webpack, além de suporte para a API do servidor.
 
 Link do site para github pages: https://amazeuz.github.io/web_project_4_ptbr/

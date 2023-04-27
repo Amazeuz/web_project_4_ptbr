@@ -12,14 +12,6 @@ import {} from '../scripts/imports.js'
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
 
-api.getServerCards().then(obj => {
-  obj.forEach(item => {
-    if (item.name.toLowerCase().includes('ddddd')) {
-      api.deleteCard(item._id)
-    }
-  })
-})
-
 const popupConfirmation = new PopupWithConfirmation(confirmationForm);
 popupConfirmation.setEventListeners()
 
@@ -61,24 +53,22 @@ function addNewCard({firstInput, secondInput}) {
       const card = new Card(item, ".default-template", handleCardClick);
       const cardElement = card.generateCard();
 
-      api.addServerCard(firstInput, secondInput).then(obj => {
+      api.addServerCard(firstInput, secondInput).then(card => {
         const cardLikeButton = cardElement.querySelector('.item__like')
         cardLikeButton.addEventListener('click', () => {
           const cardLikesNumber = cardElement.querySelector('.item__likes')
           if (!cardLikeButton.classList.contains('item__like_type_liked')) {
-            api.addLike(obj._id)
+            api.addLike(card._id)
             cardLikesNumber.textContent = 1;
           }
           else {
-            api.removeLike(obj._id)
+            api.removeLike(card._id)
             cardLikesNumber.textContent = 0;
           }
         })
       })
-
       const newImage = new PopupWithImage(imageBlock, cardElement);
       newImage.setEventListeners();
-
       enableCardDelete(cardElement);
       newCard.addItem(cardElement);
     }
@@ -100,16 +90,16 @@ const cardList = new Section({
 
       cardElement.querySelector('.item__like').addEventListener('click', () => {
         const renderedCard = api.getServerCards()
-        renderedCard.then(obj => {
-          obj.forEach(ServerCard => {
-            if (ServerCard._id === item._id) {
-              if (!checkUserLike(ServerCard)) {
-                api.addLike(ServerCard._id)
-                cardLikesNumber.textContent = ServerCard.likes.length + 1
+        renderedCard.then(serverCards => {
+          serverCards.forEach(serverCard => {
+            if (serverCard._id === item._id) {
+              if (!checkUserLike(serverCard)) {
+                api.addLike(serverCard._id)
+                cardLikesNumber.textContent = serverCard.likes.length + 1
               }
               else {
-                api.removeLike(ServerCard._id)
-                cardLikesNumber.textContent = ServerCard.likes.length - 1
+                api.removeLike(serverCard._id)
+                cardLikesNumber.textContent = serverCard.likes.length - 1
               }
             }
           })
@@ -190,4 +180,5 @@ Array.from(document.querySelectorAll('.form')).forEach((popup) => {
       popupElement.open()
     })
   }
+  api.popupsArray.push(popupElement)
 })

@@ -1,14 +1,14 @@
 .profile__photo {
+  position: absolute;
   width: 120px;
   height: 120px;
   border-radius: 100%;
-  margin-right: 30px;
   object-fit: cover;
   cursor: pointer;
   transition: opacity .4s;
 }
 
-.profile__photo:hover {
+.profile__photo:hover  {
   opacity: .5;
 }
 
