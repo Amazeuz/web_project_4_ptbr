@@ -7,7 +7,7 @@ import likeIconSrc from '../images/vector__like-button.svg'
 import lineIconSrc from '../images/logo/Line.svg'
 import vectorIconSrc from '../images/logo/Vector.svg'
 import photoEditIcon from '../images/profile-photo-edit.svg'
-import Api from '../components/Api'
+import '../components/FormValidator.js'
 
 const exitIconImages = document.querySelectorAll('img[alt="Botão de fechar o pop-up"]')
 

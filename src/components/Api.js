@@ -15,7 +15,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -32,7 +32,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -73,11 +73,9 @@ export default class Api {
     })
     .then((res) => {
       if (res.ok) {
-
         return res.json();
       }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -110,8 +108,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -132,8 +129,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -151,8 +147,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch((err) => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -170,8 +165,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch(err => {
       console.log("Erro. A solicitação falhou: ", err);
@@ -200,8 +194,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-
-        return Promise.reject(`Algo deu errado: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     })
     .catch(err => {
       console.log("Erro. A solicitação falhou: ", err);

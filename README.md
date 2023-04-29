@@ -4,13 +4,11 @@ Around the U.S é uma rede social em que os usuários podem enviar imagens para 
 
 A página é altamente responsiva, com diferentes layouts para diferentes tipos de dispositivos:
 
--Até 414px;
+- Até 414px;
+- 414px a 600px;
+- 600px a 894px;
 
--414px á 600px;
-
--600px á 894px;
-
--Resoluções superiores;
+- Resoluções superiores;
 
 Nesse projeto foram utilizados algumas tecnologias desenvolvimento web, como HTML, CSS e Javascript de git e metodologia BEM, webpack, além de suporte para a API do servidor.
 

@@ -13,7 +13,7 @@ export default class Popup {
     this._popupElement.classList.add('opacity-style');
     this._popupElement.classList.remove('popup_hidden');
     opacity.classList.add('page-opacity');
-    setTimeout(() => { this._popupOpen = true }, 1);
+    setTimeout(() => { this._popupOpen = true }, 0);
   }
 
   close() {

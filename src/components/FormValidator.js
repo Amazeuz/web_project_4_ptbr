@@ -1,4 +1,4 @@
-export default class FormValidator {
+class FormValidator {
   constructor(config, formElement) {
     this._formElement = formElement;
     this._input = config.inputSelector;
@@ -33,9 +33,9 @@ export default class FormValidator {
     }
   }
 
-  _insertEventListeners(fieldset) {
-    const formInputs = Array.from(fieldset.querySelectorAll(this._input));
-    const buttonElement = fieldset.querySelector(this._button)
+  _insertEventListeners(fieldSet) {
+    const formInputs = Array.from(fieldSet.querySelectorAll(this._input));
+    const buttonElement = fieldSet.querySelector(this._button)
 
     this._toggleButtonState(formInputs, buttonElement);
 
@@ -53,9 +53,9 @@ export default class FormValidator {
       this._formElement.querySelector(this._button).classList.add(this._inactiveButton)
     });
 
-    const fieldsets = this._formElement.querySelectorAll('.form__input-container')
-    fieldsets.forEach((fieldset) => {
-      this._insertEventListeners(fieldset);
+    const fieldSets = this._formElement.querySelectorAll('.form__input-container')
+    fieldSets.forEach((fieldSet) => {
+      this._insertEventListeners(fieldSet);
     });
   }
 }

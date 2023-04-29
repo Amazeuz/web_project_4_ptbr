@@ -6,8 +6,7 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import { api } from '../utils/constants.js';
-import FormValidator from '../components/FormValidator.js'
-import {} from '../scripts/imports.js'
+import '../scripts/imports.js'
 
 const popupImage = new PopupWithImage(imageBlock)
 popupImage.setEventListeners();
@@ -21,6 +20,7 @@ function handleCardClick(name, link) {
 
 api.loadUserInfo().then(data => {
   profilePhoto.src = data.avatar
+  profilePhoto.alt = `Foto de perfíl de ${data.name}`
   profileName.textContent = data.name
   profileAbout.textContent = data.about
 })
